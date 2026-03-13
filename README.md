@@ -1,63 +1,69 @@
 # janicequach.com
 
-personal site. clean, minimal, fast. squarespace replacement.
+personal portfolio. hub page with three immersive sections: think, lead, create. scroll-linked morphing diagrams. no frameworks beyond astro.
 
-## preview locally
+## quick start
 
 ```bash
-python -m http.server 8000
-# visit http://localhost:8000
+just dev          # start dev server at localhost:4321
+just build        # build static site to dist/
+just preview      # preview the built site locally
 ```
-
-## what's in it
-
-- lowercase casual tone (matches your voice)
-- your actual principles from ~/space/human/principles.md
-- leadership philosophy from manifesto
-- current focus (clickview, ai, team building)
-- mobile responsive
-- zero dependencies, loads in <100ms
 
 ## deploy
 
-fastest: **netlify drop**
-1. drag `index.html` to netlify.com/drop
-2. get instant URL
-3. connect custom domain (janicequach.com) in settings
-
-alternative: **github pages**
 ```bash
-gh repo create janice-quach.github.io --public
-git remote add origin git@github.com:janice-quach/janice-quach.github.io.git
-git add index.html README.md
-git commit -m "init: personal site"
-git push -u origin main
-# auto-publishes to janice-quach.github.io
+just deploy       # lint + build + push to cloudflare pages
+just deploy-quick # build + push (skip lint)
 ```
 
-## customize
+first-time setup: `npx wrangler login` to authenticate with cloudflare.
 
-all content in `index.html`:
-- L163-167: tagline + intro
-- L172-181: principles (currently from your actual principles.md)
-- L186-196: how you work (from manifesto)
-- L201-207: current focus
-- L213-215: contact links (update email to real address)
+## structure
 
-## next steps
+```
+src/
+├── layouts/Base.astro         shared html head, meta, global styles
+├── pages/
+│   ├── index.astro            hub — name, intro, think/lead/create tags
+│   ├── think.astro            scroll-morphing diagram page
+│   ├── lead.astro             team philosophy (wip)
+│   └── create.astro           visual craft + work samples (wip)
+├── components/
+│   ├── ScrollMorphDiagram.astro   the scroll-linked svg animation
+│   └── PageFooter.astro           shared footer with contact links
+└── styles/global.css          tokens, reset, shared typography
+```
 
-- [ ] update email address (L214: hello@janicequach.com)
-- [ ] add linkedin URL (L215)
-- [ ] optional: add photo/avatar
-- [ ] optional: add case studies section
-- [ ] optional: analytics (plausible.io or simple-analytics)
-- [ ] deploy to netlify or github pages
-- [ ] point janicequach.com domain to deployment
+## for janice
 
-## why this over squarespace
+you don't need to touch code. tell claude what you want changed — colours, text, layout, feel. claude will make the edits and deploy.
 
-- loads 10x faster (no bloat)
-- full control over content
-- version controlled (git)
-- free hosting (netlify/github)
-- embodies your principles (structure creates speed, clarity over cleverness)
+useful things to say:
+- "make the think page feel warmer"
+- "change the intro text to [whatever]"
+- "add my figma screenshots to the create page"
+- "the spacing feels too tight on mobile"
+- "deploy it"
+
+## for future claudes
+
+read `CLAUDE.md` first. it's the constitution for this repo. key points:
+- janice is the designer, you are the engineer
+- code quality is non-negotiable — this is a portfolio
+- `just ci` must pass before every commit
+- reference `v0.1-scroll-morphing` tag for the original prototype direction
+- portfolio research and moodboards are at `~/space/brr/portfolio/`
+- janice's voice/principles are at `~/space/human/`
+
+## tech
+
+- [astro](https://astro.build) — static site generator
+- [biome](https://biomejs.dev) — lint + format
+- [cloudflare pages](https://pages.cloudflare.com) — hosting
+- vanilla js — scroll animations, no react needed
+- dm serif display + inter — typography
+
+## domain
+
+`janicequach.com` — currently pointed at github pages, will migrate to cloudflare pages. domain registered at squarespace domains, planned transfer to cloudflare registrar.
