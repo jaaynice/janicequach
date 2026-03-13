@@ -17,7 +17,7 @@ just deploy       # lint + build + push to cloudflare pages
 just deploy-quick # build + push (skip lint)
 ```
 
-first-time setup: `npx wrangler login` to authenticate with cloudflare.
+first-time setup: `pnpm wrangler login` to authenticate with cloudflare.
 
 ## structure
 
@@ -66,4 +66,4 @@ read `CLAUDE.md` first. it's the constitution for this repo. key points:
 
 ## domain
 
-`janicequach.com` — currently pointed at github pages, will migrate to cloudflare pages. domain registered at squarespace domains, planned transfer to cloudflare registrar.
+`janicequach.com` — deploying to cloudflare pages via `just deploy`. domain DNS needs CNAME pointed to cloudflare pages. no registrar transfer required — keep domain wherever it is.
