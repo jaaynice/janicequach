@@ -8,26 +8,26 @@
         <line class="grid-line" x1="190" y1="30" x2="190" y2="350" stroke="rgba(42,58,37,0.08)" stroke-width="1"/>
         <line class="grid-line" x1="30" y1="190" x2="350" y2="190" stroke="rgba(42,58,37,0.08)" stroke-width="1"/>
         <g id="connections">
-            <line id="conn-0-1" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-1-2" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-2-3" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-3-4" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-4-0" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-0-2" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-1-3" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-0-3" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-1-4" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
-            <line id="conn-2-4" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-0-1" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-1-2" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-2-3" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-3-4" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-4-0" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-0-2" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-1-3" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-0-3" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-1-4" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
+            <line id="conn-2-4" stroke="rgba(42,58,37,0.1)" stroke-width="1.5"/>
         </g>
         <circle id="zone-1" cx="190" cy="190" r="0" fill="none" stroke="rgba(42,58,37,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
         <circle id="zone-2" cx="190" cy="190" r="0" fill="none" stroke="rgba(42,58,37,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
         <circle id="zone-3" cx="190" cy="190" r="0" fill="none" stroke="rgba(42,58,37,0.08)" stroke-width="1" stroke-dasharray="6 3"/>
         <path id="flow-path" d="" fill="none" stroke="rgba(42,58,37,0.15)" stroke-width="1.5" stroke-linecap="round"/>
-        <circle id="dot-0" r="5" fill="#4a6741" opacity="0.9"/>
-        <circle id="dot-1" r="5" fill="#4a6741" opacity="0.9"/>
-        <circle id="dot-2" r="5" fill="#4a6741" opacity="0.9"/>
-        <circle id="dot-3" r="5" fill="#4a6741" opacity="0.9"/>
-        <circle id="dot-4" r="5" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-0" r="8" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-1" r="8" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-2" r="8" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-3" r="8" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-4" r="8" fill="#4a6741" opacity="0.9"/>
         <text id="center-label" x="190" y="195" text-anchor="middle" font-size="9" letter-spacing="2" fill="rgba(42,58,37,0.35)" font-family="Inter, sans-serif" opacity="0"></text>
     </svg>
     <div id="labels-container" style="position:absolute;inset:0;pointer-events:none;">
@@ -199,7 +199,7 @@
             const y = lerp(from.dots[i][1], to.dots[i][1], t);
             dots[i].setAttribute('cx', String(x));
             dots[i].setAttribute('cy', String(y));
-            dots[i].setAttribute('r', String(si >= 4 ? 3 : lerp(5, si+1>=4?3:5, t)));
+            dots[i].setAttribute('r', String(si >= 4 ? 5 : lerp(8, si+1>=4?5:8, t)));
         }
 
         const cd = from.dots.map((d,i) => [lerp(d[0],to.dots[i][0],t), lerp(d[1],to.dots[i][1],t)]);
