@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import PageFooter from '../components/PageFooter.astro';
+---
+<Base title="create — janice quach" description="design is how it works. visual craft, UI, diagrams, and systems by janice quach.">
+    <a class="back-btn" href="/">← back</a>
+    <section class="hero">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+        <div class="hero-content">
+            <p class="label">create</p>
+            <h2>design is how it works</h2>
+            <p class="sub">i'm a visual thinker. i turn complex ideas into clear interfaces, diagrams, and systems that people actually understand.</p>
+        </div>
+    </section>
+    <section class="wip">
+        <p>this page is being designed.</p>
+        <p>work samples, visual frameworks, and UI craft will live here — the section itself will demonstrate the skill.</p>
+    </section>
+    <PageFooter prompt="want to see more or collaborate?" theme="create" />
+</Base>
+
+<style>
+    .back-btn {
+        position: fixed; top: 2rem; left: 2rem; z-index: 200;
+        font-family: 'Inter', sans-serif; font-size: 0.75rem;
+        letter-spacing: 0.15em; text-transform: uppercase;
+        color: rgba(0,0,0,0.4); background: rgba(255,255,255,0.6);
+        backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.08);
+        padding: 0.6rem 1.2rem; border-radius: 30px;
+        text-decoration: none; transition: all 0.3s ease;
+    }
+    .back-btn:hover { color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.85); }
+
+    .hero {
+        min-height: 100vh; display: flex; align-items: center;
+        justify-content: center; background: #e8e4de;
+        position: relative; overflow: hidden; padding: 6rem 2rem;
+    }
+
+    .orb-a {
+        width: 450px; height: 450px;
+        background: radial-gradient(circle at 50% 40%, rgba(220, 200, 170, 0.45), transparent 70%);
+        top: -80px; right: -80px;
+    }
+
+    .orb-b {
+        width: 380px; height: 380px;
+        background: radial-gradient(circle at 40% 60%, rgba(200, 180, 160, 0.3), transparent 70%);
+        bottom: -60px; left: -60px;
+    }
+
+    .hero-content {
+        position: relative; z-index: 1; text-align: center; max-width: 600px;
+    }
+
+    .label {
+        font-size: 0.65rem; letter-spacing: 0.25em;
+        text-transform: uppercase; color: #3a3530; opacity: 0.4;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero h2 {
+        font-size: 3.5rem; line-height: 1.15;
+        margin-bottom: 1.5rem; color: #3a3530;
+    }
+
+    .sub {
+        font-size: 1.05rem; font-weight: 300; line-height: 1.8;
+        color: #5a5550; max-width: 480px; margin: 0 auto;
+    }
+
+    .wip {
+        padding: 8rem 2rem; text-align: center; background: #f4f1eb;
+    }
+
+    .wip p {
+        font-size: 0.9rem; font-weight: 300; color: #5a5550;
+        max-width: 400px; margin: 0 auto 1rem;
+    }
+</style>

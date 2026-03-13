@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import PageFooter from '../components/PageFooter.astro';
+---
+<Base title="lead — janice quach" description="bring people on the journey. how janice quach builds teams that think for themselves.">
+    <a class="back-btn" href="/">← back</a>
+    <section class="hero">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+        <div class="hero-content">
+            <p class="label">lead</p>
+            <h2>bring people on the journey</h2>
+            <p class="sub">i'd rather my team disagree with me than nod along. shared ownership beats sign-off every time.</p>
+        </div>
+    </section>
+    <section class="wip">
+        <p>this page is being designed.</p>
+        <p>the scroll-morphing diagram for this section will visualise team dynamics — nodes connecting, autonomy expanding, trust building.</p>
+    </section>
+    <PageFooter prompt="interested in how i build teams?" theme="lead" />
+</Base>
+
+<style>
+    .back-btn {
+        position: fixed; top: 2rem; left: 2rem; z-index: 200;
+        font-family: 'Inter', sans-serif; font-size: 0.75rem;
+        letter-spacing: 0.15em; text-transform: uppercase;
+        color: rgba(0,0,0,0.4); background: rgba(255,255,255,0.6);
+        backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.08);
+        padding: 0.6rem 1.2rem; border-radius: 30px;
+        text-decoration: none; transition: all 0.3s ease;
+    }
+    .back-btn:hover { color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.85); }
+
+    .hero {
+        min-height: 100vh; display: flex; align-items: center;
+        justify-content: center; background: #d5dde6;
+        position: relative; overflow: hidden; padding: 6rem 2rem;
+    }
+
+    .orb-a {
+        width: 500px; height: 500px;
+        background: radial-gradient(circle at 60% 30%, rgba(160, 180, 210, 0.45), transparent 70%);
+        top: -120px; left: -100px;
+    }
+
+    .orb-b {
+        width: 400px; height: 400px;
+        background: radial-gradient(circle at 40% 60%, rgba(180, 200, 230, 0.3), transparent 70%);
+        bottom: -80px; right: -80px;
+    }
+
+    .hero-content {
+        position: relative; z-index: 1; text-align: center; max-width: 600px;
+    }
+
+    .label {
+        font-size: 0.65rem; letter-spacing: 0.25em;
+        text-transform: uppercase; color: #2a3545; opacity: 0.4;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero h2 {
+        font-size: 3.5rem; line-height: 1.15;
+        margin-bottom: 1.5rem; color: #2a3545;
+    }
+
+    .sub {
+        font-size: 1.05rem; font-weight: 300; line-height: 1.8;
+        color: #3d4d5e; max-width: 480px; margin: 0 auto;
+    }
+
+    .wip {
+        padding: 8rem 2rem; text-align: center; background: #edf1f5;
+    }
+
+    .wip p {
+        font-size: 0.9rem; font-weight: 300; color: #3d4d5e;
+        max-width: 400px; margin: 0 auto 1rem;
+    }
+</style>
