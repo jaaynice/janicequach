@@ -3,28 +3,28 @@
 
 # Development
 dev:
-    npx astro dev
+    pnpm astro dev
 
 build:
-    npx astro build
+    pnpm astro build
 
 preview:
-    npx astro preview
+    pnpm astro preview
 
 # Code quality
 lint:
-    npx biome check src/
+    pnpm biome check src/
 
 format:
-    npx biome format --write src/
+    pnpm biome format --write src/
 
 # CI — run before every deploy
 ci: lint build
 
 # Deploy to Cloudflare Pages
 deploy: ci
-    npx wrangler pages deploy dist/ --project-name janicequach-com
+    pnpm wrangler pages deploy dist/ --project-name janicequach-com
 
 # Quick deploy (skip lint)
 deploy-quick: build
-    npx wrangler pages deploy dist/ --project-name janicequach-com
+    pnpm wrangler pages deploy dist/ --project-name janicequach-com
