@@ -1,0 +1,261 @@
+---
+// Scroll-linked morphing SVG diagram for the Think page.
+// 5 dots morph through states: chaos → quadrant → flow → venn → convergence.
+// All animation is vanilla JS — no framework needed.
+---
+<div style="position: relative;">
+    <svg class="morph-svg" viewBox="0 0 380 380" id="morphSvg">
+        <line class="grid-line" x1="190" y1="30" x2="190" y2="350" stroke="rgba(42,58,37,0.08)" stroke-width="1"/>
+        <line class="grid-line" x1="30" y1="190" x2="350" y2="190" stroke="rgba(42,58,37,0.08)" stroke-width="1"/>
+        <g id="connections">
+            <line id="conn-0-1" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-1-2" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-2-3" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-3-4" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-4-0" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-0-2" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-1-3" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-0-3" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-1-4" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+            <line id="conn-2-4" stroke="rgba(42,58,37,0.1)" stroke-width="0.8"/>
+        </g>
+        <circle id="zone-1" cx="190" cy="190" r="0" fill="none" stroke="rgba(42,58,37,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <circle id="zone-2" cx="190" cy="190" r="0" fill="none" stroke="rgba(42,58,37,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <circle id="zone-3" cx="190" cy="190" r="0" fill="none" stroke="rgba(42,58,37,0.08)" stroke-width="1" stroke-dasharray="6 3"/>
+        <path id="flow-path" d="" fill="none" stroke="rgba(42,58,37,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle id="dot-0" r="5" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-1" r="5" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-2" r="5" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-3" r="5" fill="#4a6741" opacity="0.9"/>
+        <circle id="dot-4" r="5" fill="#4a6741" opacity="0.9"/>
+        <text id="center-label" x="190" y="195" text-anchor="middle" font-size="9" letter-spacing="2" fill="rgba(42,58,37,0.35)" font-family="Inter, sans-serif" opacity="0"></text>
+    </svg>
+    <div id="labels-container" style="position:absolute;inset:0;pointer-events:none;">
+        <span class="d-label hidden" id="lbl-0"></span>
+        <span class="d-label hidden" id="lbl-1"></span>
+        <span class="d-label hidden" id="lbl-2"></span>
+        <span class="d-label hidden" id="lbl-3"></span>
+        <span class="d-label hidden" id="lbl-4"></span>
+        <span class="d-label hidden" id="lbl-axis-t"></span>
+        <span class="d-label hidden" id="lbl-axis-b"></span>
+        <span class="d-label hidden" id="lbl-axis-l"></span>
+        <span class="d-label hidden" id="lbl-axis-r"></span>
+    </div>
+</div>
+
+<style>
+    .morph-svg {
+        width: 380px;
+        height: 380px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .d-label {
+        position: absolute;
+        font-size: 0.55rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(42, 58, 37, 0.4);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .d-label.hidden {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    @media (max-width: 900px) {
+        .morph-svg { width: 280px; height: 280px; }
+    }
+</style>
+
+<script>
+    const states: Record<number, {
+        dots: [number, number][];
+        labels: { id: number; text: string; x: number; y: number }[];
+        axisLabels: { id: string; text: string; x: number; y: number }[];
+        connections: [number, number][];
+        zones: [number, number, number];
+        flowPath: string;
+        centerLabel: string;
+        gridOpacity: number;
+        bg: string;
+    }> = {
+        0: {
+            dots: [[85,120],[290,80],[320,280],[60,310],[210,200]],
+            labels: [], axisLabels: [], connections: [],
+            zones: [0,0,0], flowPath: '', centerLabel: '', gridOpacity: 0, bg: '#c8d5c0'
+        },
+        1: {
+            dots: [[140,110],[250,100],[270,160],[160,170],[190,130]],
+            labels: [
+                {id:0,text:'intent',x:120,y:100},{id:1,text:'structure',x:255,y:88},
+                {id:2,text:'reuse',x:278,y:152},{id:3,text:'trade-offs',x:105,y:175},
+                {id:4,text:'clarity',x:195,y:120}
+            ],
+            axisLabels: [
+                {id:'t',text:'clarity',x:175,y:22},{id:'b',text:'complexity',x:162,y:370},
+                {id:'l',text:'speed',x:5,y:195},{id:'r',text:'craft',x:340,y:195}
+            ],
+            connections: [[0,4],[1,4],[2,4],[3,4],[0,1],[1,2]],
+            zones: [80,0,0], flowPath: '', centerLabel: '', gridOpacity: 1, bg: '#c3d0ba'
+        },
+        2: {
+            dots: [[190,60],[190,130],[190,200],[190,270],[190,340]],
+            labels: [
+                {id:0,text:'name the problem',x:210,y:52},{id:1,text:'map trade-offs',x:210,y:122},
+                {id:2,text:'build to scale',x:210,y:192},{id:3,text:'let quality speak',x:210,y:262},
+                {id:4,text:'compound',x:210,y:332}
+            ],
+            axisLabels: [],
+            connections: [[0,1],[1,2],[2,3],[3,4]],
+            zones: [0,0,0],
+            flowPath: 'M190,65 C190,65 190,130 190,135 C190,135 190,200 190,205 C190,205 190,270 190,275 C190,275 190,335 190,340',
+            centerLabel: '', gridOpacity: 0, bg: '#bfcbb5'
+        },
+        3: {
+            dots: [[140,150],[240,150],[190,240],[190,175],[190,190]],
+            labels: [
+                {id:0,text:'speed',x:100,y:140},{id:1,text:'quality',x:250,y:140},
+                {id:2,text:'scale',x:200,y:245},{id:3,text:'',x:0,y:0},{id:4,text:'',x:0,y:0}
+            ],
+            axisLabels: [],
+            connections: [[0,1],[1,2],[0,2],[0,3],[1,3],[2,3]],
+            zones: [85,85,85], flowPath: '', centerLabel: 'intent', gridOpacity: 0, bg: '#bac7b0'
+        },
+        4: {
+            dots: [[190,185],[190,190],[190,190],[190,195],[190,190]],
+            labels: [], axisLabels: [], connections: [],
+            zones: [120,80,40], flowPath: '', centerLabel: 'quality reflects intent', gridOpacity: 0, bg: '#b5c2ab'
+        }
+    };
+
+    const zoneCenters: Record<number, [number,number][]> = {
+        0:[[190,190],[190,190],[190,190]],
+        1:[[190,190],[190,190],[190,190]],
+        2:[[190,190],[190,190],[190,190]],
+        3:[[140,155],[240,155],[190,240]],
+        4:[[190,190],[190,190],[190,190]]
+    };
+
+    const connMap: [number,number][] = [[0,1],[1,2],[2,3],[3,4],[4,0],[0,2],[1,3],[0,3],[1,4],[2,4]];
+
+    function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+    function ease(t: number) { return t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2; }
+
+    function hexToRgb(hex: string) {
+        const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return r ? { r: parseInt(r[1],16), g: parseInt(r[2],16), b: parseInt(r[3],16) } : { r:0,g:0,b:0 };
+    }
+
+    function getProgress() {
+        const sections = document.querySelectorAll('.text-section');
+        const total = (sections.length - 1) * window.innerHeight;
+        return Math.max(0, Math.min(1, window.scrollY / total)) * (sections.length - 1);
+    }
+
+    const dots = [0,1,2,3,4].map(i => document.getElementById(`dot-${i}`)!);
+    const lbls = [0,1,2,3,4].map(i => document.getElementById(`lbl-${i}`)!);
+    const axisLbls = ['t','b','l','r'].map(id => document.getElementById(`lbl-axis-${id}`)!);
+    const connLines = connMap.map((_,i) => document.querySelectorAll('#connections line')[i] as SVGLineElement);
+    const zones = [1,2,3].map(i => document.getElementById(`zone-${i}`)!);
+    const flowPathEl = document.getElementById('flow-path')!;
+    const centerLabelEl = document.getElementById('center-label')!;
+    const gridLines = document.querySelectorAll('.grid-line');
+    const bgLayer = document.getElementById('bgLayer')!;
+    const textSections = document.querySelectorAll('.text-section');
+    const svg = document.getElementById('morphSvg')!;
+
+    function update() {
+        const progress = getProgress();
+        const si = Math.min(Math.floor(progress), 4);
+        const t = ease(progress - si);
+        const from = states[si];
+        const to = states[Math.min(si + 1, 4)];
+
+        for (let i = 0; i < 5; i++) {
+            const x = lerp(from.dots[i][0], to.dots[i][0], t);
+            const y = lerp(from.dots[i][1], to.dots[i][1], t);
+            dots[i].setAttribute('cx', String(x));
+            dots[i].setAttribute('cy', String(y));
+            dots[i].setAttribute('r', String(si >= 4 ? 3 : lerp(5, si+1>=4?3:5, t)));
+        }
+
+        const cd = from.dots.map((d,i) => [lerp(d[0],to.dots[i][0],t), lerp(d[1],to.dots[i][1],t)]);
+
+        connMap.forEach((pair, idx) => {
+            const fa = from.connections.some(c => c[0]===pair[0]&&c[1]===pair[1]);
+            const ta = to.connections.some(c => c[0]===pair[0]&&c[1]===pair[1]);
+            let op = 0;
+            if (fa && ta) op = 0.12;
+            else if (fa) op = lerp(0.12,0,t);
+            else if (ta) op = lerp(0,0.12,t);
+            connLines[idx].setAttribute('x1',String(cd[pair[0]][0]));
+            connLines[idx].setAttribute('y1',String(cd[pair[0]][1]));
+            connLines[idx].setAttribute('x2',String(cd[pair[1]][0]));
+            connLines[idx].setAttribute('y2',String(cd[pair[1]][1]));
+            connLines[idx].setAttribute('stroke',`rgba(42,58,37,${op})`);
+        });
+
+        const fzc = zoneCenters[si]; const tzc = zoneCenters[Math.min(si+1,4)];
+        for (let i = 0; i < 3; i++) {
+            const r = lerp(from.zones[i],to.zones[i],t);
+            zones[i].setAttribute('r',String(r));
+            zones[i].setAttribute('cx',String(lerp(fzc[i][0],tzc[i][0],t)));
+            zones[i].setAttribute('cy',String(lerp(fzc[i][1],tzc[i][1],t)));
+            zones[i].setAttribute('stroke',`rgba(42,58,37,${r>0?0.1:0})`);
+        }
+
+        if (to.flowPath || from.flowPath) {
+            const op = to.flowPath ? t : (1-t);
+            flowPathEl.setAttribute('d', to.flowPath || from.flowPath);
+            flowPathEl.setAttribute('stroke',`rgba(42,58,37,${0.15*op})`);
+        } else { flowPathEl.setAttribute('d',''); }
+
+        const go = lerp(from.gridOpacity,to.gridOpacity,t);
+        gridLines.forEach(l => l.setAttribute('stroke',`rgba(42,58,37,${0.08*go})`));
+
+        if (to.centerLabel) { centerLabelEl.textContent = to.centerLabel; centerLabelEl.setAttribute('opacity',String(t)); }
+        else if (from.centerLabel) { centerLabelEl.textContent = from.centerLabel; centerLabelEl.setAttribute('opacity',String(1-t)); }
+        else { centerLabelEl.setAttribute('opacity','0'); }
+
+        const rect = svg.getBoundingClientRect();
+        const sx = rect.width/380; const sy = rect.height/380;
+        for (let i = 0; i < 5; i++) {
+            const fl = from.labels.find(l=>l.id===i); const tl = to.labels.find(l=>l.id===i);
+            if (tl?.text) {
+                lbls[i].textContent = tl.text;
+                lbls[i].style.left = `${lerp(fl?.x??tl.x,tl.x,t)*sx}px`;
+                lbls[i].style.top = `${lerp(fl?.y??tl.y,tl.y,t)*sy}px`;
+                lbls[i].classList.remove('hidden');
+                lbls[i].style.opacity = String(fl?.text ? 1 : t);
+            } else if (fl?.text) {
+                lbls[i].textContent = fl.text;
+                lbls[i].style.left = `${fl.x*sx}px`; lbls[i].style.top = `${fl.y*sy}px`;
+                lbls[i].style.opacity = String(1-t);
+                if (t > 0.8) lbls[i].classList.add('hidden');
+            } else { lbls[i].classList.add('hidden'); }
+        }
+        ['t','b','l','r'].forEach((id,idx) => {
+            const fa = from.axisLabels.find(l=>l.id===id); const ta = to.axisLabels.find(l=>l.id===id);
+            if (ta) { axisLbls[idx].textContent=ta.text; axisLbls[idx].style.left=`${ta.x*sx}px`; axisLbls[idx].style.top=`${ta.y*sy}px`; axisLbls[idx].classList.remove('hidden'); axisLbls[idx].style.opacity=String(fa?1:t); }
+            else if (fa) { axisLbls[idx].style.opacity=String(1-t); if(t>0.8)axisLbls[idx].classList.add('hidden'); }
+            else { axisLbls[idx].classList.add('hidden'); }
+        });
+
+        const fb=hexToRgb(from.bg); const tb=hexToRgb(to.bg);
+        bgLayer.style.background = `rgb(${Math.round(lerp(fb.r,tb.r,t))},${Math.round(lerp(fb.g,tb.g,t))},${Math.round(lerp(fb.b,tb.b,t))})`;
+
+        textSections.forEach((sec,i) => {
+            const d = Math.abs(progress-i);
+            (sec as HTMLElement).style.opacity = String(d<0.5?1:Math.max(0.15,1-(d-0.5)*1.5));
+        });
+
+        requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+</script>

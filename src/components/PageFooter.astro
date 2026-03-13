@@ -1,0 +1,59 @@
+---
+interface Props {
+    prompt: string;
+    theme: 'think' | 'lead' | 'create';
+}
+
+const { prompt, theme } = Astro.props;
+
+const bgColors = {
+    think: '#c8d5c0',
+    lead: '#d5dde6',
+    create: '#e8e4de',
+};
+---
+<footer class="im-footer" style={`background: ${bgColors[theme]}`}>
+    <p>{prompt}</p>
+    <div class="links">
+        <a href="mailto:hello@janicequach.com">email</a>
+        <a href="https://linkedin.com/in/janicequach" target="_blank">linkedin</a>
+    </div>
+    <a class="home-link" href="/">← back to home</a>
+</footer>
+
+<style>
+    .im-footer {
+        padding: 6rem 2rem;
+        text-align: center;
+    }
+
+    .im-footer p {
+        font-size: 0.85rem;
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+        opacity: 0.5;
+    }
+
+    .links {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .links a, .home-link {
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: lowercase;
+        text-decoration: none;
+        color: inherit;
+        opacity: 0.5;
+        border-bottom: 1px solid currentColor;
+        padding-bottom: 2px;
+        transition: opacity 0.3s;
+    }
+
+    .links a:hover, .home-link:hover { opacity: 0.8; }
+
+    .home-link { opacity: 0.3; }
+</style>
