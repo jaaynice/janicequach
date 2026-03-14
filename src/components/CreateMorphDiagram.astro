@@ -1,0 +1,391 @@
+---
+// Scroll-linked morphing SVG diagram for the Create page.
+// 5 dots morph through work categories: chaos → systems grid → product flow → visual framework → convergence.
+// Adds image layer underneath for blueprint → annotated → clean transition per work sample.
+---
+<div class="create-diagram-wrap">
+    <div class="work-layer" id="workLayer">
+        <div class="work-panel" id="work-1">
+            <div class="placeholder-art">
+                <span>design systems</span>
+            </div>
+        </div>
+        <div class="work-panel" id="work-2">
+            <div class="placeholder-art">
+                <span>product interfaces</span>
+            </div>
+        </div>
+        <div class="work-panel" id="work-3">
+            <div class="placeholder-art">
+                <span>visual thinking</span>
+            </div>
+        </div>
+    </div>
+    <svg class="morph-svg" viewBox="0 0 380 380" id="createMorphSvg">
+        <line class="grid-line" x1="190" y1="30" x2="190" y2="350" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+        <line class="grid-line" x1="30" y1="190" x2="350" y2="190" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+        <g id="createConnections">
+            <line id="cc-0-1" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-1-2" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-2-3" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-3-4" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-4-0" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-0-2" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-1-3" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-0-3" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-1-4" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+            <line id="cc-2-4" stroke="rgba(58,53,48,0.1)" stroke-width="1.5"/>
+        </g>
+        <rect id="czone-1" x="0" y="0" width="0" height="0" fill="none" stroke="rgba(58,53,48,0.1)" stroke-width="1" stroke-dasharray="4 4" rx="4"/>
+        <rect id="czone-2" x="0" y="0" width="0" height="0" fill="none" stroke="rgba(58,53,48,0.1)" stroke-width="1" stroke-dasharray="4 4" rx="4"/>
+        <rect id="czone-3" x="0" y="0" width="0" height="0" fill="none" stroke="rgba(58,53,48,0.1)" stroke-width="1" stroke-dasharray="4 4" rx="4"/>
+        <rect id="czone-4" x="0" y="0" width="0" height="0" fill="none" stroke="rgba(58,53,48,0.1)" stroke-width="1" stroke-dasharray="4 4" rx="4"/>
+        <rect id="czone-5" x="0" y="0" width="0" height="0" fill="none" stroke="rgba(58,53,48,0.1)" stroke-width="1" stroke-dasharray="4 4" rx="4"/>
+        <path id="createFlowPath" d="" fill="none" stroke="rgba(58,53,48,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle id="cdot-0" r="8" fill="#6b5d50" opacity="0.9"/>
+        <circle id="cdot-1" r="8" fill="#6b5d50" opacity="0.9"/>
+        <circle id="cdot-2" r="8" fill="#6b5d50" opacity="0.9"/>
+        <circle id="cdot-3" r="8" fill="#6b5d50" opacity="0.9"/>
+        <circle id="cdot-4" r="8" fill="#6b5d50" opacity="0.9"/>
+        <text id="createCenterLabel" x="190" y="195" text-anchor="middle" font-size="9" letter-spacing="2" fill="rgba(58,53,48,0.35)" font-family="Inter, sans-serif" opacity="0"></text>
+    </svg>
+    <div id="createLabelsContainer" class="labels-container">
+        <span class="d-label hidden" id="clbl-0"></span>
+        <span class="d-label hidden" id="clbl-1"></span>
+        <span class="d-label hidden" id="clbl-2"></span>
+        <span class="d-label hidden" id="clbl-3"></span>
+        <span class="d-label hidden" id="clbl-4"></span>
+        <span class="d-label hidden" id="clbl-axis-t"></span>
+        <span class="d-label hidden" id="clbl-axis-b"></span>
+        <span class="d-label hidden" id="clbl-axis-l"></span>
+        <span class="d-label hidden" id="clbl-axis-r"></span>
+    </div>
+</div>
+
+<style>
+    .create-diagram-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .work-layer {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 0;
+    }
+
+    .work-panel {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .placeholder-art {
+        width: min(60vw, 60vh);
+        height: min(60vw, 60vh);
+        border-radius: 16px;
+        background: rgba(58, 53, 48, 0.04);
+        border: 1px dashed rgba(58, 53, 48, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .placeholder-art span {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(58, 53, 48, 0.25);
+    }
+
+    .morph-svg {
+        width: min(70vw, 70vh);
+        height: min(70vw, 70vh);
+        position: relative;
+        z-index: 1;
+    }
+
+    .labels-container {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+    }
+
+    .d-label {
+        position: absolute;
+        font-size: 0.55rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(58, 53, 48, 0.4);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .d-label.hidden {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    @media (max-width: 900px) {
+        .morph-svg { width: min(85vw, 50vh); height: min(85vw, 50vh); }
+        .placeholder-art { width: min(75vw, 45vh); height: min(75vw, 45vh); }
+    }
+</style>
+
+<script>
+    interface DiagramState {
+        dots: [number, number][];
+        labels: { id: number; text: string; x: number; y: number }[];
+        axisLabels: { id: string; text: string; x: number; y: number }[];
+        connections: [number, number][];
+        zones: { x: number; y: number; w: number; h: number }[];
+        flowPath: string;
+        centerLabel: string;
+        gridOpacity: number;
+        bg: string;
+        svgOpacity: number;
+        workPanel: number;
+    }
+
+    const states: Record<number, DiagramState> = {
+        0: {
+            dots: [[95,130],[280,90],[310,270],[70,300],[200,210]],
+            labels: [], axisLabels: [], connections: [],
+            zones: [], flowPath: '', centerLabel: '', gridOpacity: 0, bg: '#e8e4de',
+            svgOpacity: 1, workPanel: 0
+        },
+        1: {
+            dots: [[120,120],[260,120],[260,260],[120,260],[190,190]],
+            labels: [
+                {id:0,text:'colour',x:90,y:108},{id:1,text:'type',x:268,y:108},
+                {id:2,text:'components',x:268,y:252},{id:3,text:'spacing',x:78,y:252},
+                {id:4,text:'patterns',x:196,y:182}
+            ],
+            axisLabels: [],
+            connections: [[0,1],[1,2],[2,3],[3,0],[0,4],[1,4],[2,4],[3,4]],
+            zones: [
+                {x:90,y:90,w:80,h:60},{x:230,y:90,w:80,h:60},
+                {x:230,y:230,w:80,h:60},{x:90,y:230,w:80,h:60},
+                {x:160,y:160,w:80,h:60}
+            ],
+            flowPath: '', centerLabel: '', gridOpacity: 1, bg: '#e5e0d9',
+            svgOpacity: 1, workPanel: 1
+        },
+        2: {
+            dots: [[60,190],[140,190],[220,190],[300,190],[340,120]],
+            labels: [
+                {id:0,text:'entry',x:48,y:178},{id:1,text:'decision',x:120,y:178},
+                {id:2,text:'action',x:208,y:178},{id:3,text:'result',x:288,y:178},
+                {id:4,text:'loop',x:348,y:110}
+            ],
+            axisLabels: [],
+            connections: [[0,1],[1,2],[2,3],[3,4],[4,1]],
+            zones: [],
+            flowPath: 'M65,190 C65,190 140,190 145,190 C145,190 220,190 225,190 C225,190 300,190 305,190 C305,190 340,150 340,125',
+            centerLabel: '', gridOpacity: 0, bg: '#e2ddd5',
+            svgOpacity: 1, workPanel: 2
+        },
+        3: {
+            dots: [[120,120],[260,120],[260,260],[120,260],[190,190]],
+            labels: [
+                {id:0,text:'map',x:96,y:108},{id:1,text:'frame',x:268,y:108},
+                {id:2,text:'reveal',x:268,y:252},{id:3,text:'connect',x:82,y:252},
+                {id:4,text:'',x:0,y:0}
+            ],
+            axisLabels: [
+                {id:'t',text:'abstract',x:168,y:22},{id:'b',text:'concrete',x:165,y:370},
+                {id:'l',text:'parts',x:10,y:195},{id:'r',text:'whole',x:340,y:195}
+            ],
+            connections: [[0,1],[1,2],[2,3],[3,0]],
+            zones: [],
+            flowPath: '', centerLabel: '', gridOpacity: 1, bg: '#dfd9d1',
+            svgOpacity: 1, workPanel: 3
+        },
+        4: {
+            dots: [[190,185],[190,190],[190,190],[190,195],[190,190]],
+            labels: [], axisLabels: [], connections: [],
+            zones: [],
+            flowPath: '', centerLabel: 'the work speaks', gridOpacity: 0, bg: '#dbd4cc',
+            svgOpacity: 1, workPanel: 0
+        }
+    };
+
+    const connMap: [number,number][] = [[0,1],[1,2],[2,3],[3,4],[4,0],[0,2],[1,3],[0,3],[1,4],[2,4]];
+
+    function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+    function ease(t: number) { return t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2; }
+
+    function hexToRgb(hex: string) {
+        const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return r ? { r: parseInt(r[1],16), g: parseInt(r[2],16), b: parseInt(r[3],16) } : { r:0,g:0,b:0 };
+    }
+
+    function getProgress() {
+        const sections = document.querySelectorAll('.scroll-section');
+        const total = (sections.length - 1) * window.innerHeight;
+        return Math.max(0, Math.min(1, window.scrollY / total)) * (sections.length - 1);
+    }
+
+    const dots = [0,1,2,3,4].map(i => document.getElementById(`cdot-${i}`)!);
+    const lbls = [0,1,2,3,4].map(i => document.getElementById(`clbl-${i}`)!);
+    const axisLbls = ['t','b','l','r'].map(id => document.getElementById(`clbl-axis-${id}`)!);
+    const connLines = connMap.map((_,i) => document.querySelectorAll('#createConnections line')[i] as SVGLineElement);
+    const zoneRects = [1,2,3,4,5].map(i => document.getElementById(`czone-${i}`)!);
+    const flowPathEl = document.getElementById('createFlowPath')!;
+    const centerLabelEl = document.getElementById('createCenterLabel')!;
+    const gridLines = document.querySelectorAll('.create-diagram-wrap .grid-line');
+    const bgLayer = document.getElementById('createBgLayer')!;
+    const svg = document.getElementById('createMorphSvg')!;
+    const workPanels = [1,2,3].map(i => document.getElementById(`work-${i}`)!);
+
+    let cachedRect: DOMRect | null = null;
+    function getSvgScale(): [number, number] {
+        if (!cachedRect) cachedRect = svg.getBoundingClientRect();
+        return [cachedRect.width / 380, cachedRect.height / 380];
+    }
+    window.addEventListener('resize', () => { cachedRect = null; });
+
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+                update();
+                ticking = false;
+            });
+        }
+    }
+
+    function update() {
+        const progress = getProgress();
+        const si = Math.min(Math.floor(progress), 4);
+        const t = ease(progress - si);
+        const from = states[si];
+        const to = states[Math.min(si + 1, 4)];
+
+        for (let i = 0; i < 5; i++) {
+            const x = lerp(from.dots[i][0], to.dots[i][0], t);
+            const y = lerp(from.dots[i][1], to.dots[i][1], t);
+            dots[i].setAttribute('cx', String(x));
+            dots[i].setAttribute('cy', String(y));
+            dots[i].setAttribute('r', String(si >= 4 ? 5 : lerp(8, si+1>=4?5:8, t)));
+        }
+
+        const cd = from.dots.map((d,i) => [lerp(d[0],to.dots[i][0],t), lerp(d[1],to.dots[i][1],t)]);
+
+        connMap.forEach((pair, idx) => {
+            const fa = from.connections.some(c => c[0]===pair[0]&&c[1]===pair[1]);
+            const ta = to.connections.some(c => c[0]===pair[0]&&c[1]===pair[1]);
+            let op = 0;
+            if (fa && ta) op = 0.12;
+            else if (fa) op = lerp(0.12,0,t);
+            else if (ta) op = lerp(0,0.12,t);
+            connLines[idx].setAttribute('x1',String(cd[pair[0]][0]));
+            connLines[idx].setAttribute('y1',String(cd[pair[0]][1]));
+            connLines[idx].setAttribute('x2',String(cd[pair[1]][0]));
+            connLines[idx].setAttribute('y2',String(cd[pair[1]][1]));
+            connLines[idx].setAttribute('stroke',`rgba(58,53,48,${op})`);
+        });
+
+        // Zone rectangles
+        for (let i = 0; i < 5; i++) {
+            const fz = from.zones[i]; const tz = to.zones[i];
+            if (tz) {
+                const x = lerp(fz?.x ?? tz.x, tz.x, t);
+                const y = lerp(fz?.y ?? tz.y, tz.y, t);
+                const w = lerp(fz?.w ?? 0, tz.w, t);
+                const h = lerp(fz?.h ?? 0, tz.h, t);
+                zoneRects[i].setAttribute('x', String(x));
+                zoneRects[i].setAttribute('y', String(y));
+                zoneRects[i].setAttribute('width', String(w));
+                zoneRects[i].setAttribute('height', String(h));
+                zoneRects[i].setAttribute('stroke', `rgba(58,53,48,${w > 0 ? 0.1 : 0})`);
+            } else if (fz) {
+                const w = lerp(fz.w, 0, t);
+                const h = lerp(fz.h, 0, t);
+                zoneRects[i].setAttribute('x', String(fz.x));
+                zoneRects[i].setAttribute('y', String(fz.y));
+                zoneRects[i].setAttribute('width', String(w));
+                zoneRects[i].setAttribute('height', String(h));
+                zoneRects[i].setAttribute('stroke', `rgba(58,53,48,${w > 0 ? 0.1 : 0})`);
+            } else {
+                zoneRects[i].setAttribute('width', '0');
+                zoneRects[i].setAttribute('height', '0');
+            }
+        }
+
+        if (to.flowPath || from.flowPath) {
+            const op = to.flowPath ? t : (1-t);
+            flowPathEl.setAttribute('d', to.flowPath || from.flowPath);
+            flowPathEl.setAttribute('stroke',`rgba(58,53,48,${0.15*op})`);
+        } else { flowPathEl.setAttribute('d',''); }
+
+        const go = lerp(from.gridOpacity,to.gridOpacity,t);
+        gridLines.forEach(l => l.setAttribute('stroke',`rgba(58,53,48,${0.08*go})`));
+
+        if (to.centerLabel) { centerLabelEl.textContent = to.centerLabel; centerLabelEl.setAttribute('opacity',String(t)); }
+        else if (from.centerLabel) { centerLabelEl.textContent = from.centerLabel; centerLabelEl.setAttribute('opacity',String(1-t)); }
+        else { centerLabelEl.setAttribute('opacity','0'); }
+
+        // Labels
+        const [sx, sy] = getSvgScale();
+        for (let i = 0; i < 5; i++) {
+            const fl = from.labels.find(l=>l.id===i); const tl = to.labels.find(l=>l.id===i);
+            if (tl?.text) {
+                lbls[i].textContent = tl.text;
+                lbls[i].style.left = `${lerp(fl?.x??tl.x,tl.x,t)*sx}px`;
+                lbls[i].style.top = `${lerp(fl?.y??tl.y,tl.y,t)*sy}px`;
+                lbls[i].classList.remove('hidden');
+                lbls[i].style.opacity = String(fl?.text ? 1 : t);
+            } else if (fl?.text) {
+                lbls[i].textContent = fl.text;
+                lbls[i].style.left = `${fl.x*sx}px`; lbls[i].style.top = `${fl.y*sy}px`;
+                lbls[i].style.opacity = String(1-t);
+                if (t > 0.8) lbls[i].classList.add('hidden');
+            } else { lbls[i].classList.add('hidden'); }
+        }
+        ['t','b','l','r'].forEach((id,idx) => {
+            const fa = from.axisLabels.find(l=>l.id===id); const ta = to.axisLabels.find(l=>l.id===id);
+            if (ta) { axisLbls[idx].textContent=ta.text; axisLbls[idx].style.left=`${ta.x*sx}px`; axisLbls[idx].style.top=`${ta.y*sy}px`; axisLbls[idx].classList.remove('hidden'); axisLbls[idx].style.opacity=String(fa?1:t); }
+            else if (fa) { axisLbls[idx].style.opacity=String(1-t); if(t>0.8)axisLbls[idx].classList.add('hidden'); }
+            else { axisLbls[idx].classList.add('hidden'); }
+        });
+
+        // Background
+        const fb=hexToRgb(from.bg); const tb=hexToRgb(to.bg);
+        bgLayer.style.background = `rgb(${Math.round(lerp(fb.r,tb.r,t))},${Math.round(lerp(fb.g,tb.g,t))},${Math.round(lerp(fb.b,tb.b,t))})`;
+
+        // Work panel visibility — panels fade in at mid-transition of their section
+        for (let p = 0; p < 3; p++) {
+            const panelSection = p + 1; // panels map to sections 1, 2, 3
+            const dist = Math.abs(progress - panelSection);
+            if (dist < 0.4) {
+                // Near the section — show panel, fade SVG
+                const panelOpacity = 1 - (dist / 0.4);
+                workPanels[p].style.opacity = String(panelOpacity * 0.6);
+            } else {
+                workPanels[p].style.opacity = '0';
+            }
+        }
+
+        // Scroll section opacity
+        const textSections = document.querySelectorAll('.scroll-section');
+        textSections.forEach((sec,i) => {
+            const d = Math.abs(progress-i);
+            (sec as HTMLElement).style.opacity = String(d<0.5?1:Math.max(0.15,1-(d-0.5)*1.5));
+        });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+</script>

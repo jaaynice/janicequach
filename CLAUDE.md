@@ -48,7 +48,7 @@ Palette (from moodboard — soft, muted, organic):
 Typography:
 - `DM Serif Display` — headings (editorial warmth)
 - `Inter` — body (clean, readable)
-- All headings lowercase
+- All headings and copy in sentence case (nav labels like think/lead/create stay lowercase)
 
 Visual language: gradient orbs, SVG diagrams, generous whitespace. No icons unless necessary. No stock photography.
 </design-system>
