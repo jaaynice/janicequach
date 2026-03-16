@@ -13,11 +13,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.0.4"
+    "astro": "^6.0.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.7",
-    "wrangler": "^4.73.0"
+    "wrangler": "^4.74.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
