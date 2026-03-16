@@ -7,17 +7,20 @@
     <div class="work-layer" id="workLayer">
         <div class="work-panel" id="work-1">
             <div class="placeholder-art">
-                <span>design systems</span>
+                <span class="placeholder-label">design systems</span>
+                <span class="placeholder-phase" id="phase-1">blueprint</span>
             </div>
         </div>
         <div class="work-panel" id="work-2">
             <div class="placeholder-art">
-                <span>product interfaces</span>
+                <span class="placeholder-label">product interfaces</span>
+                <span class="placeholder-phase" id="phase-2">blueprint</span>
             </div>
         </div>
         <div class="work-panel" id="work-3">
             <div class="placeholder-art">
-                <span>visual thinking</span>
+                <span class="placeholder-label">visual thinking</span>
+                <span class="placeholder-phase" id="phase-3">blueprint</span>
             </div>
         </div>
     </div>
@@ -100,11 +103,23 @@
         justify-content: center;
     }
 
-    .placeholder-art span {
+    .placeholder-label {
         font-size: 0.7rem;
         letter-spacing: 0.15em;
         text-transform: uppercase;
         color: rgba(58, 53, 48, 0.25);
+    }
+
+    .placeholder-phase {
+        font-size: 0.55rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(58, 53, 48, 0.15);
+        margin-top: 0.5rem;
+    }
+
+    .placeholder-art {
+        flex-direction: column;
     }
 
     .morph-svg {
@@ -401,18 +416,45 @@
         const fb=hexToRgb(from.bg); const tb=hexToRgb(to.bg);
         bgLayer.style.background = `rgb(${Math.round(lerp(fb.r,tb.r,t))},${Math.round(lerp(fb.g,tb.g,t))},${Math.round(lerp(fb.b,tb.b,t))})`;
 
-        // Work panel visibility — panels fade in at mid-transition of their section
+        // Three-beat work panel animation per section:
+        // blueprint (0-0.33): diagram alone, panel hidden
+        // annotated (0.33-0.67): panel fades in behind diagram overlay
+        // clean (0.67-1.0): diagram fades out, panel stands alone
+        const phaseLbls = [1,2,3].map(i => document.getElementById(`phase-${i}`)!);
         for (let p = 0; p < 3; p++) {
-            const panelSection = p + 1; // panels map to sections 1, 2, 3
-            const dist = Math.abs(progress - panelSection);
-            if (dist < 0.4) {
-                // Near the section — show panel, fade SVG
-                const panelOpacity = 1 - (dist / 0.4);
-                workPanels[p].style.opacity = String(panelOpacity * 0.6);
+            const panelSection = p + 1;
+            const sub = progress - panelSection; // -1 to 1 range when in/near this section
+            if (sub >= -0.1 && sub <= 1.1) {
+                const t = Math.max(0, Math.min(1, sub));
+                if (t < 0.33) {
+                    // Blueprint: diagram visible, panel barely visible
+                    workPanels[p].style.opacity = String(t / 0.33 * 0.15);
+                    phaseLbls[p].textContent = 'blueprint';
+                } else if (t < 0.67) {
+                    // Annotated: panel fades in behind diagram
+                    const at = (t - 0.33) / 0.34;
+                    workPanels[p].style.opacity = String(0.15 + at * 0.55);
+                    phaseLbls[p].textContent = 'annotated';
+                } else {
+                    // Clean: panel full, diagram overlay fades
+                    const ct = (t - 0.67) / 0.33;
+                    workPanels[p].style.opacity = String(0.7 + ct * 0.3);
+                    // Fade the SVG overlay during clean phase
+                    if (ct > 0.3) {
+                        svg.style.opacity = String(1 - (ct - 0.3) / 0.7);
+                    }
+                    phaseLbls[p].textContent = 'clean';
+                }
             } else {
                 workPanels[p].style.opacity = '0';
             }
         }
+        // Reset SVG opacity when not in clean phase
+        const inClean = [1,2,3].some(s => {
+            const sub = progress - s;
+            return sub >= 0.67 && sub <= 1.1;
+        });
+        if (!inClean) svg.style.opacity = '1';
 
         // Scroll section opacity
         const textSections = document.querySelectorAll('.scroll-section');
