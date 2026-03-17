@@ -39,6 +39,33 @@ h3 {
     opacity: 0.4;
 }
 
+/* ===== FOCUS ===== */
+:focus-visible {
+    outline: 2px solid #2a2a2a;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ===== SKIP LINK ===== */
+.skip-link {
+    position: fixed;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    padding: 0.6rem 1.2rem;
+    background: #2a2520;
+    color: #f4f1eb;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-radius: 0 0 8px 8px;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     h1 {
