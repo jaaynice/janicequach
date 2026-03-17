@@ -6,22 +6,37 @@
 <div class="create-diagram-wrap">
     <div class="work-layer" id="workLayer">
         <div class="work-panel" id="work-1">
-            <div class="placeholder-art">
-                <span class="placeholder-label">design systems</span>
-                <span class="placeholder-phase" id="phase-1">blueprint</span>
+            <!-- Drop screenshot: public/work/systems.jpg (or .png, .webp) -->
+            <div class="image-slot">
+                <img class="work-img" src="/work/systems.jpg" alt="design systems work sample" onerror="this.style.display='none'">
+                <div class="slot-empty">
+                    <span class="placeholder-label">design systems</span>
+                    <span class="slot-hint">drop screenshot → public/work/systems.jpg</span>
+                </div>
             </div>
+            <span class="placeholder-phase" id="phase-1">blueprint</span>
         </div>
         <div class="work-panel" id="work-2">
-            <div class="placeholder-art">
-                <span class="placeholder-label">product interfaces</span>
-                <span class="placeholder-phase" id="phase-2">blueprint</span>
+            <!-- Drop screenshot: public/work/product.jpg (or .png, .webp) -->
+            <div class="image-slot">
+                <img class="work-img" src="/work/product.jpg" alt="product interface work sample" onerror="this.style.display='none'">
+                <div class="slot-empty">
+                    <span class="placeholder-label">product interfaces</span>
+                    <span class="slot-hint">drop screenshot → public/work/product.jpg</span>
+                </div>
             </div>
+            <span class="placeholder-phase" id="phase-2">blueprint</span>
         </div>
         <div class="work-panel" id="work-3">
-            <div class="placeholder-art">
-                <span class="placeholder-label">visual thinking</span>
-                <span class="placeholder-phase" id="phase-3">blueprint</span>
+            <!-- Drop screenshot: public/work/visual.jpg (or .png, .webp) -->
+            <div class="image-slot">
+                <img class="work-img" src="/work/visual.jpg" alt="visual thinking work sample" onerror="this.style.display='none'">
+                <div class="slot-empty">
+                    <span class="placeholder-label">visual thinking</span>
+                    <span class="slot-hint">drop screenshot → public/work/visual.jpg</span>
+                </div>
             </div>
+            <span class="placeholder-phase" id="phase-3">blueprint</span>
         </div>
     </div>
     <svg class="morph-svg" viewBox="0 0 380 380" id="createMorphSvg">
@@ -92,15 +107,36 @@
         transition: opacity 0.4s ease;
     }
 
-    .placeholder-art {
+    .image-slot {
+        position: relative;
         width: min(60vw, 60vh);
         height: min(60vw, 60vh);
         border-radius: 16px;
-        background: rgba(58, 53, 48, 0.04);
-        border: 1px dashed rgba(58, 53, 48, 0.12);
+        overflow: hidden;
+    }
+
+    .work-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+        display: block;
+    }
+
+    .slot-empty {
+        position: absolute;
+        inset: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        background: rgba(58, 53, 48, 0.04);
+        border: 1px dashed rgba(58, 53, 48, 0.12);
+        border-radius: 16px;
+        gap: 0.5rem;
+        pointer-events: none;
     }
 
     .placeholder-label {
@@ -110,16 +146,22 @@
         color: rgba(58, 53, 48, 0.25);
     }
 
+    .slot-hint {
+        font-size: 0.5rem;
+        letter-spacing: 0.08em;
+        color: rgba(58, 53, 48, 0.15);
+        font-family: 'Inter', sans-serif;
+    }
+
     .placeholder-phase {
+        position: absolute;
+        bottom: 1.5rem;
+        right: 1.5rem;
         font-size: 0.55rem;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: rgba(58, 53, 48, 0.15);
-        margin-top: 0.5rem;
-    }
-
-    .placeholder-art {
-        flex-direction: column;
+        color: rgba(58, 53, 48, 0.25);
+        z-index: 2;
     }
 
     .morph-svg {
