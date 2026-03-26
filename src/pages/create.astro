@@ -62,6 +62,14 @@ import Base from "../layouts/Base.astro";
         </article>
     </section>
 
+    <div class="detail-overlay" id="detailOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <button class="detail-close" id="detailClose" aria-label="Close detail view">&times;</button>
+        <div class="detail-content" id="detailContent">
+            <div class="detail-image" id="detailImage"></div>
+            <div class="detail-text" id="detailText"></div>
+        </div>
+    </div>
+
     <PageFooter theme="create" />
 </Base>
 
@@ -254,6 +262,102 @@ import Base from "../layouts/Base.astro";
         }
     }
 
+    .work-card {
+        cursor: pointer;
+    }
+
+    .detail-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 500;
+        background: rgba(42, 37, 32, 0.85);
+        backdrop-filter: blur(20px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s ease;
+    }
+
+    .detail-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .detail-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 510;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s ease;
+    }
+
+    .detail-close:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+
+    .detail-content {
+        max-width: 900px;
+        width: 90vw;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 3rem;
+        align-items: center;
+        transform: translateY(16px);
+        transition: transform 0.35s ease;
+    }
+
+    .detail-overlay.open .detail-content {
+        transform: translateY(0);
+    }
+
+    .detail-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    .detail-text .work-label {
+        color: rgba(255, 255, 255, 0.35);
+    }
+
+    .detail-text h3 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        color: #f4f1eb;
+        margin-bottom: 1rem;
+    }
+
+    .detail-text p:last-child {
+        font-size: 0.9rem;
+        font-weight: 300;
+        line-height: 1.85;
+        color: rgba(244, 241, 235, 0.7);
+    }
+
+    @media (max-width: 900px) {
+        .detail-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+    }
+
     @media (max-width: 900px) {
         .text-bubble {
             right: 1.5rem;
@@ -366,4 +470,45 @@ import Base from "../layouts/Base.astro";
         { threshold: 0.15 }
     );
     cards.forEach((card) => observer.observe(card));
+
+    const overlay = document.getElementById('detailOverlay') as HTMLElement;
+    const detailImage = document.getElementById('detailImage') as HTMLElement;
+    const detailText = document.getElementById('detailText') as HTMLElement;
+    const detailClose = document.getElementById('detailClose') as HTMLElement;
+
+    function openDetail(card: HTMLElement) {
+        const img = card.querySelector('.work-card-image')?.innerHTML ?? '';
+        const text = card.querySelector('.work-card-text')?.innerHTML ?? '';
+        detailImage.innerHTML = img;
+        detailText.innerHTML = text;
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        detailClose.focus();
+    }
+
+    function closeDetail() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    cards.forEach((card) => {
+        card.addEventListener('click', () => openDetail(card));
+        card.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openDetail(card);
+            }
+        });
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', card.querySelector('h3')?.textContent ?? 'View detail');
+    });
+
+    detailClose.addEventListener('click', closeDetail);
+    overlay.addEventListener('click', (e: MouseEvent) => {
+        if (e.target === overlay) closeDetail();
+    });
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeDetail();
+    });
 </script>
