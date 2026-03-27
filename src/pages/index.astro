@@ -2,4 +2,105 @@
 import Base from "../layouts/Base.astro";
 ---
 <Base title="janice quach">
+<div class="hub">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+
+    <div class="hub-content">
+        <h1>janice<br>quach</h1>
+        <p class="intro">design lead who builds teams that think for themselves. i care about messy human dynamics, honest feedback, and work that actually matters.</p>
+        <nav class="tags" aria-label="sections">
+            <a class="tag tag-think" href="/think">think</a>
+            <a class="tag tag-lead" href="/lead">lead</a>
+            <a class="tag tag-create" href="/create">create</a>
+        </nav>
+    </div>
+</div>
 </Base>
+
+<style>
+    .hub {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #f4f1eb;
+    }
+
+    .orb-1 {
+        width: 600px; height: 600px;
+        background: radial-gradient(circle at 40% 40%, rgba(200, 213, 192, 0.5), transparent 70%);
+        top: -150px; right: -100px;
+    }
+
+    .orb-2 {
+        width: 400px; height: 400px;
+        background: radial-gradient(circle at 60% 60%, rgba(213, 221, 230, 0.4), transparent 70%);
+        bottom: -80px; left: -80px;
+    }
+
+    .orb-3 {
+        width: 300px; height: 300px;
+        background: radial-gradient(circle at 50% 50%, rgba(232, 228, 222, 0.6), transparent 70%);
+        top: 40%; left: 30%;
+    }
+
+    .hub-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    h1 {
+        font-size: clamp(4rem, 10vw, 8rem);
+        line-height: 1;
+        color: #2a2520;
+        margin-bottom: 2rem;
+        letter-spacing: -0.02em;
+    }
+
+    .intro {
+        font-size: clamp(0.9rem, 2vw, 1.05rem);
+        font-weight: 300;
+        color: rgba(42, 37, 32, 0.6);
+        max-width: 480px;
+        margin: 0 auto 3rem;
+        line-height: 1.8;
+    }
+
+    .tags {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        text-transform: lowercase;
+        text-decoration: none;
+        padding: 0.7rem 2rem;
+        border-radius: 30px;
+        border: 1px solid rgba(42, 37, 32, 0.15);
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        color: rgba(42, 37, 32, 0.7);
+        transition: all 0.25s ease;
+    }
+
+    .tag:hover {
+        background: rgba(255, 255, 255, 0.85);
+        color: #2a2520;
+        border-color: rgba(42, 37, 32, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .tag-think:hover { background: rgba(200, 213, 192, 0.6); }
+    .tag-lead:hover  { background: rgba(213, 221, 230, 0.6); }
+    .tag-create:hover { background: rgba(232, 228, 222, 0.8); }
+</style>
