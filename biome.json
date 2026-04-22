@@ -1,53 +1,71 @@
 {
-    "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
-    "assist": { "actions": { "source": { "organizeImports": "on" } } },
-    "linter": {
-        "enabled": true,
-        "rules": {
-            "recommended": true,
-            "complexity": {
-                "noExcessiveCognitiveComplexity": "warn"
-            },
-            "style": {
-                "noNonNullAssertion": "error",
-                "useConst": "error",
-                "useConsistentArrayType": { "level": "error", "options": { "syntax": "shorthand" } }
-            },
-            "suspicious": {
-                "noExplicitAny": "error"
-            },
-            "correctness": {
-                "noUnusedImports": "off",
-                "noUnusedVariables": "off"
-            }
-        }
-    },
+  "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
     "formatter": {
-        "enabled": true,
-        "indentStyle": "space",
-        "indentWidth": 4,
-        "lineWidth": 120
-    },
-    "css": {
-        "formatter": {
-            "enabled": true,
-            "indentStyle": "space",
-            "indentWidth": 4
-        },
-        "linter": {
-            "enabled": true
-        }
-    },
-    "files": {
-        "includes": [
-            "**/src/**/*.ts",
-            "**/src/**/*.js",
-            "**/src/**/*.astro",
-            "**/src/**/*.css",
-            "**/*.mjs",
-            "!**/node_modules",
-            "!**/dist",
-            "!**/.astro"
-        ]
+      "quoteStyle": "single",
+      "semicolons": "asNeeded",
+      "trailingCommas": "all"
     }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2
+    },
+    "linter": { "enabled": true }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "warn"
+      },
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "error",
+        "useConst": "error",
+        "useConsistentArrayType": { "level": "error", "options": { "syntax": "shorthand" } }
+      },
+      "suspicious": {
+        "noExplicitAny": "error"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedImports": "off",
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    }
+  ],
+  "files": {
+    "includes": [
+      "**/src/**/*.ts",
+      "**/src/**/*.js",
+      "**/src/**/*.astro",
+      "**/src/**/*.css",
+      "**/*.mjs",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/.astro"
+    ]
+  }
 }
