@@ -34,30 +34,6 @@ import Base from '../layouts/Base.astro'
 </Base>
 
 <style>
-    .back-btn {
-        position: fixed;
-        top: 2rem;
-        left: 2rem;
-        z-index: 200;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.75rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: rgba(0,0,0,0.4);
-        background: rgba(255,255,255,0.6);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(0,0,0,0.08);
-        padding: 0.6rem 1.2rem;
-        border-radius: 30px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .back-btn:hover {
-        color: rgba(0,0,0,0.7);
-        background: rgba(255,255,255,0.85);
-    }
-
     .bg-layer {
         position: fixed;
         inset: 0;
@@ -150,77 +126,41 @@ import Base from '../layouts/Base.astro'
 </style>
 
 <script>
-    const textData = [
-        {
-            num: 'think',
-            headline: 'Clarity over cleverness',
-            body: 'My brain works like this — ideas start scattered, and the job is finding the structure underneath. Whether it\'s research, design, or strategy, I\'m drawn to simple rules that make every decision after them easier.'
-        },
-        {
-            num: '01 — structure',
-            headline: 'Structure creates speed',
-            body: 'Good structure means less time navigating, more time making. I sit inside the product team, not next to it — so the frameworks I build have to work for engineers and PMs too, not just designers.'
-        },
-        {
-            num: '02 — systems',
-            headline: 'Build once, reuse often',
-            body: 'I think in systems — not because they\'re elegant, but because the right one means the next person doesn\'t have to solve the same problem again.'
-        },
-        {
-            num: '03 — trade-offs',
-            headline: 'Intentional trade-offs',
-            body: 'Every decision optimises for something and sacrifices something else. I\'d rather name that out loud than hide behind "best practice." What\'s the trade-off? What are we giving up? If we can\'t answer that, we haven\'t actually decided anything.'
-        },
-        {
-            num: '04 — intent',
-            headline: 'Quality reflects intent',
-            body: 'You can feel when someone cared about the thing they made. The best work feels obvious — not because it\'s simple, but because someone made the complexity invisible.'
-        }
-    ];
+    import { initScrollSections } from '../scripts/scroll-sections'
 
-    const bubble = document.getElementById('textBubble') as HTMLElement;
-    const bubbleNum = document.getElementById('bubbleNum') as HTMLElement;
-    const bubbleH2 = document.getElementById('bubbleHeadline') as HTMLElement;
-    const bubbleBody = document.getElementById('bubbleBody') as HTMLElement;
-    const diagramFixed = document.getElementById('diagramFixed') as HTMLElement;
-    const scrollTrack = document.querySelector('.scroll-track') as HTMLElement;
-
-    let currentSection = 0;
-    let ticking = false;
-
-    function getActiveSection(): number {
-        const section = document.querySelector('.scroll-section') as HTMLElement;
-        const sectionHeight = section.offsetHeight;
-        return Math.min(Math.round(window.scrollY / sectionHeight), textData.length - 1);
-    }
-
-    function onScroll() {
-        if (!ticking) {
-            ticking = true;
-            requestAnimationFrame(() => {
-                const active = getActiveSection();
-                if (active !== currentSection) {
-                    currentSection = active;
-                    const data = textData[active];
-                    bubble.style.opacity = '0';
-                    setTimeout(() => {
-                        bubbleNum.textContent = data.num;
-                        bubbleH2.textContent = data.headline;
-                        bubbleBody.textContent = data.body;
-                        bubble.style.opacity = '1';
-                    }, 150);
-                }
-
-                // Hide fixed elements when scrolled past the scroll track
-                const trackBottom = scrollTrack.getBoundingClientRect().bottom;
-                const pastTrack = trackBottom < window.innerHeight * 0.5;
-                diagramFixed.style.opacity = pastTrack ? '0' : '1';
-                bubble.style.display = pastTrack ? 'none' : '';
-
-                ticking = false;
-            });
-        }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
+    initScrollSections({
+        sectionSelector: '.scroll-section',
+        bubbleId: 'textBubble',
+        numId: 'bubbleNum',
+        headlineId: 'bubbleHeadline',
+        bodyId: 'bubbleBody',
+        diagramId: 'diagramFixed',
+        slides: [
+            {
+                num: 'think',
+                headline: 'Clarity over cleverness',
+                body: 'My brain works like this — ideas start scattered, and the job is finding the structure underneath. Whether it\'s research, design, or strategy, I\'m drawn to simple rules that make every decision after them easier.'
+            },
+            {
+                num: '01 — structure',
+                headline: 'Structure creates speed',
+                body: 'Good structure means less time navigating, more time making. I sit inside the product team, not next to it — so the frameworks I build have to work for engineers and PMs too, not just designers.'
+            },
+            {
+                num: '02 — systems',
+                headline: 'Build once, reuse often',
+                body: 'I think in systems — not because they\'re elegant, but because the right one means the next person doesn\'t have to solve the same problem again.'
+            },
+            {
+                num: '03 — trade-offs',
+                headline: 'Intentional trade-offs',
+                body: 'Every decision optimises for something and sacrifices something else. I\'d rather name that out loud than hide behind "best practice." What\'s the trade-off? What are we giving up? If we can\'t answer that, we haven\'t actually decided anything.'
+            },
+            {
+                num: '04 — intent',
+                headline: 'Quality reflects intent',
+                body: 'You can feel when someone cared about the thing they made. The best work feels obvious — not because it\'s simple, but because someone made the complexity invisible.'
+            }
+        ]
+    })
 </script>

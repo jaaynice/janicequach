@@ -74,30 +74,6 @@ import Base from '../layouts/Base.astro'
 </Base>
 
 <style>
-    .back-btn {
-        position: fixed;
-        top: 2rem;
-        left: 2rem;
-        z-index: 200;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.75rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: rgba(0,0,0,0.4);
-        background: rgba(255,255,255,0.6);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(0,0,0,0.08);
-        padding: 0.6rem 1.2rem;
-        border-radius: 30px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .back-btn:hover {
-        color: rgba(0,0,0,0.7);
-        background: rgba(255,255,255,0.85);
-    }
-
     .bg-layer {
         position: fixed;
         inset: 0;
@@ -384,78 +360,43 @@ import Base from '../layouts/Base.astro'
 </style>
 
 <script>
-    const textData = [
-        {
-            num: 'create',
-            headline: 'Design is how it works',
-            body: 'I\'m a visual thinker. When something\'s complex, my instinct is to draw it — not explain it. This page is proof.'
-        },
-        {
-            num: '01 — systems',
-            headline: 'Build the system, not the screen',
-            body: 'Components, tokens, patterns — the invisible architecture that makes every future screen faster to build and harder to break.'
-        },
-        {
-            num: '02 — product',
-            headline: 'Complexity made invisible',
-            body: 'The best interfaces feel obvious. That takes research, trade-offs, and a hundred decisions no one will ever notice.'
-        },
-        {
-            num: '03 — visual',
-            headline: 'Draw it to see it',
-            body: 'When something\'s complex, drawing it usually shows me what words couldn\'t. Diagrams aren\'t decoration — they\'re how I think.'
-        },
-        {
-            num: '04 — craft',
-            headline: 'Make it real',
-            body: 'Make as much as possible. Tend to chaos and see what survives. The best work isn\'t planned — it\'s the thing that refused to die.'
-        }
-    ];
+    import { initScrollSections } from '../scripts/scroll-sections'
 
-    const bubble = document.getElementById('createTextBubble') as HTMLElement;
-    const bubbleNum = document.getElementById('createBubbleNum') as HTMLElement;
-    const bubbleH2 = document.getElementById('createBubbleHeadline') as HTMLElement;
-    const bubbleBody = document.getElementById('createBubbleBody') as HTMLElement;
-    const diagramFixed = document.getElementById('createDiagramFixed') as HTMLElement;
-    const scrollTrack = document.querySelector('.scroll-track') as HTMLElement;
-
-    let currentSection = 0;
-    let ticking = false;
-
-    function getActiveSection(): number {
-        const section = document.querySelector('.scroll-section') as HTMLElement;
-        const sectionHeight = section.offsetHeight;
-        return Math.min(Math.round(window.scrollY / sectionHeight), textData.length - 1);
-    }
-
-    function onScroll() {
-        if (!ticking) {
-            ticking = true;
-            requestAnimationFrame(() => {
-                const active = getActiveSection();
-                if (active !== currentSection) {
-                    currentSection = active;
-                    const data = textData[active];
-                    bubble.style.opacity = '0';
-                    setTimeout(() => {
-                        bubbleNum.textContent = data.num;
-                        bubbleH2.textContent = data.headline;
-                        bubbleBody.textContent = data.body;
-                        bubble.style.opacity = '1';
-                    }, 150);
-                }
-
-                const trackBottom = scrollTrack.getBoundingClientRect().bottom;
-                const pastTrack = trackBottom < window.innerHeight * 0.5;
-                diagramFixed.style.opacity = pastTrack ? '0' : '1';
-                bubble.style.display = pastTrack ? 'none' : '';
-
-                ticking = false;
-            });
-        }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
+    initScrollSections({
+        sectionSelector: '.scroll-section',
+        bubbleId: 'createTextBubble',
+        numId: 'createBubbleNum',
+        headlineId: 'createBubbleHeadline',
+        bodyId: 'createBubbleBody',
+        diagramId: 'createDiagramFixed',
+        slides: [
+            {
+                num: 'create',
+                headline: 'Design is how it works',
+                body: 'I\'m a visual thinker. When something\'s complex, my instinct is to draw it — not explain it. This page is proof.'
+            },
+            {
+                num: '01 — systems',
+                headline: 'Build the system, not the screen',
+                body: 'Components, tokens, patterns — the invisible architecture that makes every future screen faster to build and harder to break.'
+            },
+            {
+                num: '02 — product',
+                headline: 'Complexity made invisible',
+                body: 'The best interfaces feel obvious. That takes research, trade-offs, and a hundred decisions no one will ever notice.'
+            },
+            {
+                num: '03 — visual',
+                headline: 'Draw it to see it',
+                body: 'When something\'s complex, drawing it usually shows me what words couldn\'t. Diagrams aren\'t decoration — they\'re how I think.'
+            },
+            {
+                num: '04 — craft',
+                headline: 'Make it real',
+                body: 'Make as much as possible. Tend to chaos and see what survives. The best work isn\'t planned — it\'s the thing that refused to die.'
+            }
+        ]
+    })
 
     const cards = document.querySelectorAll<HTMLElement>('.work-card');
     const observer = new IntersectionObserver(

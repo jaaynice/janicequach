@@ -34,30 +34,6 @@ import Base from '../layouts/Base.astro'
 </Base>
 
 <style>
-    .back-btn {
-        position: fixed;
-        top: 2rem;
-        left: 2rem;
-        z-index: 200;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.75rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: rgba(0,0,0,0.4);
-        background: rgba(255,255,255,0.6);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(0,0,0,0.08);
-        padding: 0.6rem 1.2rem;
-        border-radius: 30px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .back-btn:hover {
-        color: rgba(0,0,0,0.7);
-        background: rgba(255,255,255,0.85);
-    }
-
     .bg-layer {
         position: fixed;
         inset: 0;
@@ -82,17 +58,13 @@ import Base from '../layouts/Base.astro'
     }
 
     .orb-a {
-        position: absolute;
         width: 500px; height: 500px;
-        border-radius: 50%;
         background: radial-gradient(circle at 40% 40%, rgba(130, 160, 200, 0.35), transparent 70%);
         top: -120px; right: -120px;
     }
 
     .orb-b {
-        position: absolute;
         width: 400px; height: 400px;
-        border-radius: 50%;
         background: radial-gradient(circle at 60% 60%, rgba(160, 185, 220, 0.25), transparent 70%);
         bottom: -100px; left: -80px;
     }
@@ -154,76 +126,41 @@ import Base from '../layouts/Base.astro'
 </style>
 
 <script>
-    const textData = [
-        {
-            num: 'lead',
-            headline: 'Bring people on the journey',
-            body: "I went from being the only designer to leading a team of 8 inside a product org. Most of what I've learned about leadership, I figured out by doing it — and I'm still figuring it out."
-        },
-        {
-            num: '01 — contribution',
-            headline: 'Contribution over presence',
-            body: "I want people who riff, build, disagree — and come out with something better than any of us would've made alone. What frustrates me is when people don't bring their own thinking. If I'm steering every decision, that's not a team — it's a funnel."
-        },
-        {
-            num: '02 — the gap',
-            headline: 'The gap between knowing and doing',
-            body: "Everyone nods when you name the pattern. But then what? Knowing something and actually doing it are different things. That gap is where I focus — turning frameworks into real behaviour change, not just shared language."
-        },
-        {
-            num: '03 — decisions',
-            headline: 'Decisions like a tree',
-            body: "I think about decisions like a tree. Some are leaves — make them yourself. Some are branches — bring them to me. Some are the trunk — that's my call. It's how autonomy works without chaos."
-        },
-        {
-            num: '04 — inception',
-            headline: 'Inception over buy-in',
-            body: "Buy-in is asking permission after the fact. Inception is building it together from the start. If people helped make the decision, you don't need to sell them on it."
-        }
-    ];
+    import { initScrollSections } from '../scripts/scroll-sections'
 
-    const bubble = document.getElementById('textBubble') as HTMLElement;
-    const bubbleNum = document.getElementById('bubbleNum') as HTMLElement;
-    const bubbleH2 = document.getElementById('bubbleHeadline') as HTMLElement;
-    const bubbleBody = document.getElementById('bubbleBody') as HTMLElement;
-    const diagramFixed = document.getElementById('diagramFixed') as HTMLElement;
-    const scrollTrack = document.querySelector('.scroll-track') as HTMLElement;
-
-    let currentSection = 0;
-    let ticking = false;
-
-    function getActiveSection(): number {
-        const section = document.querySelector('.lead-scroll-section') as HTMLElement;
-        const sectionHeight = section.offsetHeight;
-        return Math.min(Math.round(window.scrollY / sectionHeight), textData.length - 1);
-    }
-
-    function onScroll() {
-        if (!ticking) {
-            ticking = true;
-            requestAnimationFrame(() => {
-                const active = getActiveSection();
-                if (active !== currentSection) {
-                    currentSection = active;
-                    const data = textData[active];
-                    bubble.style.opacity = '0';
-                    setTimeout(() => {
-                        bubbleNum.textContent = data.num;
-                        bubbleH2.textContent = data.headline;
-                        bubbleBody.textContent = data.body;
-                        bubble.style.opacity = '1';
-                    }, 150);
-                }
-
-                const trackBottom = scrollTrack.getBoundingClientRect().bottom;
-                const pastTrack = trackBottom < window.innerHeight * 0.5;
-                diagramFixed.style.opacity = pastTrack ? '0' : '1';
-                bubble.style.display = pastTrack ? 'none' : '';
-
-                ticking = false;
-            });
-        }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
+    initScrollSections({
+        sectionSelector: '.lead-scroll-section',
+        bubbleId: 'textBubble',
+        numId: 'bubbleNum',
+        headlineId: 'bubbleHeadline',
+        bodyId: 'bubbleBody',
+        diagramId: 'diagramFixed',
+        slides: [
+            {
+                num: 'lead',
+                headline: 'Bring people on the journey',
+                body: "I went from being the only designer to leading a team of 8 inside a product org. Most of what I've learned about leadership, I figured out by doing it — and I'm still figuring it out."
+            },
+            {
+                num: '01 — contribution',
+                headline: 'Contribution over presence',
+                body: "I want people who riff, build, disagree — and come out with something better than any of us would've made alone. What frustrates me is when people don't bring their own thinking. If I'm steering every decision, that's not a team — it's a funnel."
+            },
+            {
+                num: '02 — the gap',
+                headline: 'The gap between knowing and doing',
+                body: "Everyone nods when you name the pattern. But then what? Knowing something and actually doing it are different things. That gap is where I focus — turning frameworks into real behaviour change, not just shared language."
+            },
+            {
+                num: '03 — decisions',
+                headline: 'Decisions like a tree',
+                body: "I think about decisions like a tree. Some are leaves — make them yourself. Some are branches — bring them to me. Some are the trunk — that's my call. It's how autonomy works without chaos."
+            },
+            {
+                num: '04 — inception',
+                headline: 'Inception over buy-in',
+                body: "Buy-in is asking permission after the fact. Inception is building it together from the start. If people helped make the decision, you don't need to sell them on it."
+            }
+        ]
+    })
 </script>
