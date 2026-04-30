@@ -62,6 +62,9 @@ const LOGIN_HTML = `<!DOCTYPE html>
 
 export const onRequest: PagesFunction = async ({ request, next }) => {
   const url = new URL(request.url)
+
+  if (url.pathname.startsWith('/api/')) return next()
+
   const cookie = request.headers.get('cookie') || ''
   const hasAccess = cookie.split(';').some((c) => c.trim() === `${COOKIE_NAME}=${PASSWORD}`)
 
