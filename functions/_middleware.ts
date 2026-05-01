@@ -81,12 +81,16 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     const body = await request.formData()
     const attempt = body.get('password')?.toString() ?? ''
     if (attempt === PASSWORD) {
-      const response = Response.redirect(url.toString(), 302)
-      response.headers.set(
-        'Set-Cookie',
-        `${COOKIE_NAME}=${SESSION_TOKEN}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; SameSite=Lax; Secure`,
-      )
-      return response
+      // Response.redirect() returns an immutable-headers response (Fetch spec guard).
+      // headers.set() on it throws TypeError in Cloudflare Workers — cookie never sets.
+      // Use new Response() instead so the Location + Set-Cookie headers are mutable.
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: url.toString(),
+          'Set-Cookie': `${COOKIE_NAME}=${SESSION_TOKEN}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; SameSite=Lax; Secure`,
+        },
+      })
     }
     return new Response(
       LOGIN_HTML.replace('{{ERROR}}', '<p class="error">wrong password</p>'),
