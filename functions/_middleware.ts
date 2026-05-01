@@ -1,4 +1,5 @@
-const PASSWORD = 'monsterra'
+// PASSWORD should be set as BLOG_PASSWORD env var in CF Pages dashboard.
+// Falls back to hardcoded value — rotate by setting the env var, then remove the fallback.
 const SESSION_TOKEN = 'ok_7f3a9c'  // not the password — decoupled so cookie doesn't reveal auth secret
 const COOKIE_NAME = 'jq_access'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 days
@@ -64,7 +65,8 @@ const LOGIN_HTML = `<!DOCTYPE html>
 </body>
 </html>`
 
-export const onRequest: PagesFunction = async ({ request, next }) => {
+export const onRequest: PagesFunction<{ BLOG_PASSWORD?: string }> = async ({ request, next, env }) => {
+  const PASSWORD = env.BLOG_PASSWORD || 'monsterra'
   const url = new URL(request.url)
 
   // Public: everything except individual blog posts (index at /blog/ is public)
