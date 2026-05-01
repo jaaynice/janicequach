@@ -1,4 +1,5 @@
 const PASSWORD = 'monsterra'
+const SESSION_TOKEN = 'ok_7f3a9c'  // not the password — decoupled so cookie doesn't reveal auth secret
 const COOKIE_NAME = 'jq_access'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 days
 
@@ -72,7 +73,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
 
   // /blog/[slug] requires auth
   const cookie = request.headers.get('cookie') || ''
-  const hasAccess = cookie.split(';').some((c) => c.trim() === `${COOKIE_NAME}=${PASSWORD}`)
+  const hasAccess = cookie.split(';').some((c) => c.trim() === `${COOKIE_NAME}=${SESSION_TOKEN}`)
 
   if (hasAccess) return next()
 
@@ -83,7 +84,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
       const response = Response.redirect(url.toString(), 302)
       response.headers.set(
         'Set-Cookie',
-        `${COOKIE_NAME}=${PASSWORD}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; SameSite=Lax; Secure`,
+        `${COOKIE_NAME}=${SESSION_TOKEN}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; SameSite=Lax; Secure`,
       )
       return response
     }
