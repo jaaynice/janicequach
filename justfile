@@ -23,4 +23,4 @@ ci: lint build
 
 # Deploy to Cloudflare Pages
 deploy: ci
-    CLOUDFLARE_ACCOUNT_ID=80cc805d16aa1dd81cc6f459124b0c51 pnpm wrangler pages deploy
+    CLOUDFLARE_ACCOUNT_ID=80cc805d16aa1dd81cc6f459124b0c51 pnpm wrangler pages deploy --branch main
