@@ -21,11 +21,13 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return new Response('bad', { status: 400, headers })
     }
 
-    context.env.READS.writeDataPoint({
-      blobs: [slug, referrer || ''],
-      doubles: [scroll, time],
-      indexes: [slug],
-    })
+    if (context.env.READS) {
+      context.env.READS.writeDataPoint({
+        blobs: [slug, referrer || ''],
+        doubles: [scroll, time],
+        indexes: [slug],
+      })
+    }
 
     return new Response('ok', { status: 200, headers })
   } catch {
