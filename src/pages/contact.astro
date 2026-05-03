@@ -1,0 +1,169 @@
+---
+import PageFooter from '../components/PageFooter.astro'
+import Base from '../layouts/Base.astro'
+---
+<Base title="contact — janice quach" description="Get in touch about design consulting, workshops, or collaboration.">
+    <div class="contact-page">
+        <a class="back-btn" href="/" aria-label="Back to home">← back</a>
+
+        <div class="contact-content">
+            <div class="orb orb-a" aria-hidden="true"></div>
+            <div class="orb orb-b" aria-hidden="true"></div>
+
+            <header class="contact-header">
+                <p class="contact-label">get in touch</p>
+                <h1>let's talk about<br>how things should work</h1>
+                <p class="contact-intro">I'm a design leader with 10 years building products, teams, and systems. If you're working on something that needs clearer thinking — research, strategy, design systems, team structure — I'd like to hear about it.</p>
+            </header>
+
+            <div class="contact-cta">
+                <a class="contact-email" href="mailto:hello@janicequach.com">hello@janicequach.com</a>
+                <p class="contact-note">or find me on <a href="https://linkedin.com/in/janicequach" target="_blank" rel="noopener noreferrer">linkedin</a></p>
+            </div>
+
+            <div class="contact-offers">
+                <div class="offer">
+                    <h2>consulting</h2>
+                    <p>Design strategy, research ops, team coaching. For companies that need senior design thinking without a full-time hire.</p>
+                </div>
+                <div class="offer">
+                    <h2>workshops</h2>
+                    <p>Half-day or full-day sessions. Research synthesis, design system kickoffs, team alignment. You leave with decisions, not sticky notes.</p>
+                </div>
+            </div>
+        </div>
+
+        <PageFooter theme="create" />
+    </div>
+</Base>
+
+<style>
+    .contact-page {
+        background: #f4f1eb;
+        min-height: 100vh;
+    }
+
+    .contact-content {
+        position: relative;
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 8rem 2rem 6rem;
+        overflow: hidden;
+    }
+
+    .orb-a {
+        width: 400px; height: 400px;
+        background: radial-gradient(circle at 50% 40%, rgba(200, 213, 192, 0.35), transparent 70%);
+        top: -100px; right: -150px;
+    }
+
+    .orb-b {
+        width: 350px; height: 350px;
+        background: radial-gradient(circle at 40% 60%, rgba(213, 221, 230, 0.3), transparent 70%);
+        bottom: 0; left: -120px;
+    }
+
+    .contact-header {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 4rem;
+    }
+
+    .contact-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(58, 53, 48, 0.3);
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-header h1 {
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        line-height: 1.15;
+        color: #2a2520;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-intro {
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.85;
+        color: #5a5550;
+        max-width: 520px;
+    }
+
+    .contact-cta {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 5rem;
+    }
+
+    .contact-email {
+        display: inline-block;
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-size: clamp(1.3rem, 3vw, 1.8rem);
+        color: #2a2520;
+        text-decoration: none;
+        border-bottom: 2px solid rgba(42, 37, 32, 0.15);
+        padding-bottom: 4px;
+        transition: border-color 0.3s ease;
+    }
+
+    .contact-email:hover {
+        border-color: rgba(42, 37, 32, 0.5);
+    }
+
+    .contact-note {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: rgba(58, 53, 48, 0.4);
+    }
+
+    .contact-note a {
+        color: inherit;
+        border-bottom: 1px solid currentColor;
+        text-decoration: none;
+        transition: opacity 0.3s;
+    }
+
+    .contact-note a:hover {
+        opacity: 0.8;
+    }
+
+    .contact-offers {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+    }
+
+    .offer h2 {
+        font-size: 0.65rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(58, 53, 48, 0.3);
+        margin-bottom: 1rem;
+    }
+
+    .offer p {
+        font-size: 0.9rem;
+        font-weight: 300;
+        line-height: 1.85;
+        color: #5a5550;
+    }
+
+    @media (max-width: 768px) {
+        .contact-content {
+            padding: 6rem 1.5rem 4rem;
+        }
+
+        .contact-offers {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+</style>
