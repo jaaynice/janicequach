@@ -1,0 +1,168 @@
+---
+interface Props {
+  label: string
+  title: string
+  client?: string
+  problem: string
+  approach: string
+  outcome: string
+  metric?: string
+  heroImage?: string
+  images?: string[]
+}
+
+const { label, title, client, problem, approach, outcome, metric, heroImage, images = [] } = Astro.props
+---
+<article class="case-study">
+    {heroImage && (
+        <div class="case-hero">
+            <img src={heroImage} alt={title} width="1200" height="800" loading="lazy" />
+        </div>
+    )}
+
+    <header class="case-header">
+        <p class="case-label">{label}</p>
+        <h1>{title}</h1>
+        {client && <p class="case-client">{client}</p>}
+    </header>
+
+    <div class="case-body">
+        <section class="case-section">
+            <h2>the problem</h2>
+            <p>{problem}</p>
+        </section>
+
+        <section class="case-section">
+            <h2>the approach</h2>
+            <p>{approach}</p>
+        </section>
+
+        <section class="case-section">
+            <h2>the outcome</h2>
+            <p>{outcome}</p>
+            {metric && <p class="case-metric">{metric}</p>}
+        </section>
+    </div>
+
+    {images.length > 0 && (
+        <div class="case-gallery">
+            {images.map((src) => (
+                <div class="case-gallery-item">
+                    <img src={src} alt="" width="1200" height="800" loading="lazy" />
+                </div>
+            ))}
+        </div>
+    )}
+</article>
+
+<style>
+    .case-study {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 2rem 6rem;
+    }
+
+    .case-hero {
+        margin: 0 -2rem 4rem;
+        max-width: calc(100% + 4rem);
+        border-radius: 0 0 16px 16px;
+        overflow: hidden;
+    }
+
+    .case-hero img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .case-header {
+        margin-bottom: 4rem;
+    }
+
+    .case-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(58, 53, 48, 0.3);
+        margin-bottom: 1.5rem;
+    }
+
+    .case-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.15;
+        color: #3a3530;
+        margin-bottom: 0.75rem;
+    }
+
+    .case-client {
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: rgba(58, 53, 48, 0.4);
+    }
+
+    .case-body {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+    }
+
+    .case-section h2 {
+        font-size: 0.65rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(58, 53, 48, 0.3);
+        margin-bottom: 1.2rem;
+    }
+
+    .case-section p {
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.85;
+        color: #5a5550;
+    }
+
+    .case-metric {
+        margin-top: 1.5rem;
+        font-size: 1.3rem;
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-weight: 400;
+        color: #3a3530;
+        line-height: 1.3;
+    }
+
+    .case-gallery {
+        margin-top: 4rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .case-gallery-item {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(58, 53, 48, 0.06);
+    }
+
+    .case-gallery-item img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    @media (max-width: 768px) {
+        .case-study {
+            padding: 0 1.5rem 4rem;
+        }
+
+        .case-hero {
+            margin: 0 -1.5rem 3rem;
+            max-width: calc(100% + 3rem);
+        }
+
+        .case-body {
+            gap: 2.5rem;
+        }
+    }
+</style>
