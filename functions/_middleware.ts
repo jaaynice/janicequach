@@ -65,17 +65,18 @@ const LOGIN_HTML = `<!DOCTYPE html>
 </html>`
 
 export const onRequest: PagesFunction<{ BLOG_PASSWORD: string; SESSION_TOKEN: string }> = async ({ request, next, env }) => {
-  if (!env.BLOG_PASSWORD || !env.SESSION_TOKEN) {
-    // Fail closed — no access without configured secrets
-    return new Response('Blog auth not configured', { status: 503 })
-  }
-  const PASSWORD = env.BLOG_PASSWORD
-  const SESSION_TOKEN = env.SESSION_TOKEN
   const url = new URL(request.url)
 
   // Public: everything except individual blog posts (index at /blog/ is public)
   const isBlogPost = url.pathname.startsWith('/blog/') && url.pathname !== '/blog/'
   if (!isBlogPost) return next()
+
+  // Blog post auth — fail closed only for the protected paths
+  if (!env.BLOG_PASSWORD || !env.SESSION_TOKEN) {
+    return new Response('Blog auth not configured', { status: 503 })
+  }
+  const PASSWORD = env.BLOG_PASSWORD
+  const SESSION_TOKEN = env.SESSION_TOKEN
 
   // /blog/[slug] requires auth
   const cookie = request.headers.get('cookie') || ''
