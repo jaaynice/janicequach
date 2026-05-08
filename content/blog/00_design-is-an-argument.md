@@ -27,3 +27,7 @@ make the argument. be specific about what you're claiming and why. then let peop
 that's what design critique should be. not "i prefer the other version" but "i think you're wrong about this" — and then a real conversation about who's right and what evidence would settle it.
 
 design that can't be argued with can't be improved.
+
+---
+
+if you want feedback that engages with your argument — not just the surface — i offer [structured design critique](/critique). $75.

@@ -27,3 +27,7 @@ i haven't figured out what replaces them. i'm guessing it's more critique, more 
 what i feel sure about: taste is not a vibe. it's not something you either have or you don't. it's trained, and the training is effortful, and skipping it shows up later in ways that are hard to name but obvious to anyone whose standard is high enough to see them.
 
 the good news is that means it can be built intentionally. the bad news is that means you actually have to do that.
+
+---
+
+building taste requires honest feedback on the work you're actually making. i offer [structured design critique](/critique) — diagnostic, not decorative. $75.
