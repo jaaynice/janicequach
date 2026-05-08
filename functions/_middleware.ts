@@ -1,6 +1,5 @@
-// PASSWORD should be set as BLOG_PASSWORD env var in CF Pages dashboard.
-// Falls back to hardcoded value — rotate by setting the env var, then remove the fallback.
-const SESSION_TOKEN = 'ok_7f3a9c'  // not the password — decoupled so cookie doesn't reveal auth secret
+// BLOG_PASSWORD must be set as env var in CF Pages dashboard.
+// SESSION_TOKEN must be set as env var in CF Pages dashboard (any random string, not the password).
 const COOKIE_NAME = 'jq_access'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 days
 
@@ -65,8 +64,13 @@ const LOGIN_HTML = `<!DOCTYPE html>
 </body>
 </html>`
 
-export const onRequest: PagesFunction<{ BLOG_PASSWORD?: string }> = async ({ request, next, env }) => {
-  const PASSWORD = env.BLOG_PASSWORD || 'monsterra'
+export const onRequest: PagesFunction<{ BLOG_PASSWORD: string; SESSION_TOKEN: string }> = async ({ request, next, env }) => {
+  if (!env.BLOG_PASSWORD || !env.SESSION_TOKEN) {
+    // Fail closed — no access without configured secrets
+    return new Response('Blog auth not configured', { status: 503 })
+  }
+  const PASSWORD = env.BLOG_PASSWORD
+  const SESSION_TOKEN = env.SESSION_TOKEN
   const url = new URL(request.url)
 
   // Public: everything except individual blog posts (index at /blog/ is public)
