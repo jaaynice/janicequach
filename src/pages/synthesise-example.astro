@@ -1,0 +1,355 @@
+---
+import PageFooter from '../components/PageFooter.astro'
+import Base from '../layouts/Base.astro'
+---
+<Base
+  title="research synthesis — example output"
+  description="this is what you receive. a structured synthesis of B2B onboarding research: themes, tensions, design implications, and priority actions."
+>
+  <a href="/synthesise" class="back-btn">← synthesis</a>
+
+  <section class="example">
+    <div class="orb orb-1" aria-hidden="true"></div>
+
+    <div class="content">
+      <p class="eyebrow">example output</p>
+      <h1>what you receive.</h1>
+      <p class="lede">this is a real synthesis output. the brief was B2B onboarding research — 6 product manager interviews. the same structure applies to every submission.</p>
+
+      <div class="rule" aria-hidden="true"></div>
+
+      <div class="report">
+
+        <div class="section brief-box">
+          <p class="brief-label">brief</p>
+          <p>usability research on a B2B onboarding flow. 6 participants — mid-level product managers at companies of 50–200 people. research data: interview transcripts (lightly edited), 45–60 min each, covering first-run experience, week-one usage, and unmet expectations.</p>
+        </div>
+
+        <div class="section">
+          <h2>executive summary</h2>
+          <p>onboarding fails not at the technical level but at the expectation level. participants arrived expecting to configure a tool; the product expected them to explore one. this mismatch — between a "get to work" mental model and a "discover the value" onboarding philosophy — explains most of the friction. six of six participants described some version of "i didn't know what i was supposed to do first." the word "supposed" is doing work here: they're looking for a prescribed path, not an exploration space. the product doesn't give them one.</p>
+          <p>the week-one retention risk is specific: participants who didn't connect the tool to a real workflow within the first session stopped logging in. those who did — even imperfectly — came back.</p>
+        </div>
+
+        <div class="section">
+          <h2>key themes</h2>
+
+          <div class="theme">
+            <p class="theme-title">1. the empty state is the crisis point</p>
+            <p>every participant encountered an empty dashboard after setup. none found it inviting. five described it as either "blank" (literal) or "intimidating" (emotional).</p>
+            <blockquote>"i set it up and then stared at it. it didn't tell me what to do next."</blockquote>
+            <p>this is not a copy problem or a design problem in isolation — it's a product problem. the tool has no concept of a "starter workflow." everything requires the user to invent their own structure before they can experience the value.</p>
+          </div>
+
+          <div class="theme">
+            <p class="theme-title">2. templates are discovered too late</p>
+            <p>four participants found the template library after struggling for 10–20 minutes. two found it through search, not navigation. one never found it. when shown the template library in the session, the universal response was some version of "why didn't it show me this at the start?"</p>
+            <p>templates are the product's best argument for itself. they're buried.</p>
+          </div>
+
+          <div class="theme">
+            <p class="theme-title">3. collaboration is assumed, not scaffolded</p>
+            <p>the product's value proposition is explicitly collaborative. but onboarding is entirely single-player. not one participant was prompted to invite a colleague during setup. when asked, four said they would have — but forgot to come back to it.</p>
+            <blockquote>"i set it up thinking i'd add my team later. later never happened."</blockquote>
+            <p>the collaboration hook needs to be in the critical path, not post-setup.</p>
+          </div>
+
+          <div class="theme">
+            <p class="theme-title">4. notifications are the wrong retention mechanism</p>
+            <p>all six participants mentioned notifications. three had turned them off by week one. the complaints were consistent: too frequent, too vague ("someone made a change"), not actionable. notifications are being used as a retention layer for a product that hasn't yet established its value. that ordering is backwards.</p>
+          </div>
+
+          <div class="theme">
+            <p class="theme-title">5. power users telegraph the fix</p>
+            <p>two retained participants described the same behaviour: they imported an existing project from another tool in the first session. this gave them a real artifact to work with, which made the product's features legible. the import flow is not prominent. it's not suggested during onboarding. it works, and it's being ignored.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>tensions</h2>
+          <div class="tension-list">
+            <div class="tension">
+              <span class="tension-pair">exploration vs. direction</span>
+              <p>the product is designed for exploration; users want direction. the current onboarding resolves the tension wrong — it offers nothing when users need something.</p>
+            </div>
+            <div class="tension">
+              <span class="tension-pair">individual setup vs. team value</span>
+              <p>the product's value compounds with team use. but onboarding is optimised for individual setup speed. if you don't capture the team invite during setup, you probably don't get it at all.</p>
+            </div>
+            <div class="tension">
+              <span class="tension-pair">notification frequency vs. trust</span>
+              <p>heavy early notifications signal that the product isn't confident in its own stickiness. the participants who turned off notifications did so in the first week — a permanent loss of a retention channel, triggered by overuse of it.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>design implications</h2>
+          <ul class="implications">
+            <li><strong>make the import prominent.</strong> surface "import from notion / jira / asana" as the first option in the empty state, above "start from scratch." this gives users a real artifact immediately.</li>
+            <li><strong>add a prescriptive onboarding path, toggleable.</strong> import or template → invite one person → set one reminder. three steps. users who want to explore can dismiss it; users who need structure will follow it.</li>
+            <li><strong>templates in the empty state, not the library.</strong> three curated templates by role or use case — not a catalogue of fifty.</li>
+            <li><strong>move the team invite into setup.</strong> not optional. allow skipping, but put the friction on skipping, not on doing it.</li>
+            <li><strong>replace vague notifications with milestone notifications.</strong> "your first project has 3 open tasks" is signal. "someone made a change" is noise. tie notifications to workflow milestones.</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>gaps &amp; uncertainties</h2>
+          <p>this research captured first-run and week-one experience only. it doesn't tell us whether template adoption in week one predicts week-four retention, how the experience differs for technical vs. non-technical users, or what the import flow actually feels like at scale — none of the six attempted it unprompted.</p>
+          <p class="recommend">recommend: a follow-up session with 3–4 retained users on the import path, and an analytics pull on template adoption timing.</p>
+        </div>
+
+      </div>
+
+      <div class="cta-row">
+        <a href="https://synthesis.janicequach.workers.dev" class="cta">submit your research → $300</a>
+        <a href="/synthesise" class="back-link">← back to synthesis</a>
+      </div>
+    </div>
+  </section>
+
+  <PageFooter theme="contact" />
+</Base>
+
+<style>
+  .example {
+    position: relative;
+    min-height: 100vh;
+    padding: 8rem 2rem 6rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .orb-1 {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle at 40% 40%, rgba(197, 210, 225, 0.22), transparent 70%);
+    top: -100px;
+    right: -80px;
+    z-index: 0;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(42, 37, 32, 0.5);
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #2a2520;
+    margin-bottom: 1.25rem;
+  }
+
+  .lede {
+    font-size: 1rem;
+    color: rgba(42, 37, 32, 0.6);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .rule {
+    width: 48px;
+    height: 1px;
+    background: rgba(42, 37, 32, 0.2);
+    margin-bottom: 3rem;
+  }
+
+  .report {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .section h2 {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: #2a2520;
+    margin-bottom: 0.875rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(42, 37, 32, 0.1);
+  }
+
+  .section p {
+    font-size: 0.9375rem;
+    color: rgba(42, 37, 32, 0.72);
+    line-height: 1.8;
+    margin-bottom: 0.875rem;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section strong {
+    color: #2a2520;
+    font-weight: 600;
+  }
+
+  /* brief box */
+  .brief-box {
+    background: rgba(42, 37, 32, 0.04);
+    border: 1px solid rgba(42, 37, 32, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .brief-label {
+    font-size: 0.7rem !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(42, 37, 32, 0.4) !important;
+    margin-bottom: 0.625rem !important;
+  }
+
+  /* themes */
+  .theme {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid rgba(42, 37, 32, 0.07);
+  }
+
+  .theme:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .theme-title {
+    font-weight: 600 !important;
+    color: #2a2520 !important;
+    margin-bottom: 0.625rem !important;
+  }
+
+  blockquote {
+    border-left: 2px solid rgba(42, 37, 32, 0.2);
+    padding-left: 1rem;
+    margin: 0.875rem 0;
+    font-style: italic;
+    font-size: 0.9375rem;
+    color: rgba(42, 37, 32, 0.6);
+    line-height: 1.7;
+  }
+
+  /* tensions */
+  .tension-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .tension-pair {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(42, 37, 32, 0.5);
+    margin-bottom: 0.375rem;
+  }
+
+  .tension p {
+    margin-bottom: 0;
+  }
+
+  /* implications */
+  .implications {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .implications li {
+    font-size: 0.9375rem;
+    color: rgba(42, 37, 32, 0.72);
+    line-height: 1.8;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .implications li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: rgba(42, 37, 32, 0.3);
+  }
+
+  .recommend {
+    font-size: 0.875rem !important;
+    background: rgba(42, 37, 32, 0.04);
+    border-radius: 6px;
+    padding: 0.875rem 1rem;
+    margin-top: 0.875rem !important;
+    color: rgba(42, 37, 32, 0.6) !important;
+  }
+
+  /* cta */
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cta {
+    display: inline-block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #f4f1eb;
+    background: #2a2520;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cta:hover {
+    background: #45403a;
+    transform: translateY(-2px);
+  }
+
+  .back-link {
+    font-size: 0.875rem;
+    color: rgba(42, 37, 32, 0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: rgba(42, 37, 32, 0.8);
+  }
+
+  @media (max-width: 768px) {
+    .example {
+      padding: 6rem 1.5rem 4rem;
+    }
+
+    .cta-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+</style>

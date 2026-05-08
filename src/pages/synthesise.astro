@@ -23,7 +23,10 @@ import Base from '../layouts/Base.astro'
       <p class="body">paste your transcripts, notes, or survey exports — raw is fine. you'll get back a structured report: key themes with direct evidence, insights mapped to concrete design implications, the tensions your data raises (not smoothed over), and priority actions ranked by impact.</p>
       <p class="body">no revision cycles. scope is defined by what you submit. the more signal, the stronger the synthesis.</p>
 
-      <a href="https://synthesis.janicequach.workers.dev" class="cta">submit your research →</a>
+      <div class="cta-row">
+        <a href="https://synthesis.janicequach.workers.dev" class="cta">submit your research →</a>
+        <a href="/synthesise-example" class="example-link">see example output →</a>
+      </div>
     </div>
   </section>
 
@@ -119,9 +122,27 @@ import Base from '../layouts/Base.astro'
     margin-bottom: 1.25rem;
   }
 
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .example-link {
+    font-size: 0.875rem;
+    color: rgba(42, 37, 32, 0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .example-link:hover {
+    color: rgba(42, 37, 32, 0.8);
+  }
+
   .cta {
     display: inline-block;
-    margin-top: 2rem;
     font-size: 0.9375rem;
     font-weight: 500;
     letter-spacing: 0.02em;
