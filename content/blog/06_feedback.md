@@ -24,3 +24,7 @@ but even when designers do that, they often get feedback that doesn't engage wit
 
 which is why i think the value of good critique — from someone who actually knows what they're looking at — is easy to underestimate. not because it's validating, but because it's diagnostic. it tells you where your argument breaks down. that's different from "this looks nice" or "not sure about the font." it's the thing that moves the work forward.
 
+---
+
+if your design is ready for that kind of diagnostic feedback, i offer [structured design critique](/critique) — analysis at the level of the argument, not the surface. $75.
+

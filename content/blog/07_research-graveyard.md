@@ -27,3 +27,7 @@ most never get there. not because the researcher didn't see it, but because the 
 so the folder grows. another study, another set of transcripts, another vague promise to come back to it when things slow down.
 
 things don't slow down.
+
+---
+
+if you have transcripts and recordings sitting in a folder, i offer [research synthesis](/synthesise) — turning evidence into actionable design decisions. $300.
