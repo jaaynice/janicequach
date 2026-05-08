@@ -25,8 +25,21 @@ import Base from '../layouts/Base.astro'
 
       <div class="cta-row">
         <a href="https://critique.janicequach.workers.dev" class="cta">submit your design →</a>
-        <a href="/critique-example" class="example-link">see example output →</a>
       </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="proof-inner">
+      <p class="proof-label">example output</p>
+      <p class="proof-brief"><strong>Brief:</strong> Landing page for a B2B project management tool. Designer's concern: "the hero feels disconnected from the features below it — like two different sites stitched together."</p>
+      <div class="proof-excerpt">
+        <p class="proof-section-title">First impression</p>
+        <p>The eye lands immediately on the headline — which is doing its job — but the transition to the feature grid below it is abrupt enough to feel like a hard cut rather than a conversation. The page reads competent, not confident.</p>
+        <p class="proof-section-title">Priority fix #1</p>
+        <p>Align grid widths between hero and features. Match the content max-width across every section. The hero content sits in roughly 720px; the feature grid snaps to full bleed. The eye reads them as belonging to different containers — because they do. This solves the "two sites" feeling in one change.</p>
+      </div>
+      <a href="/critique-example" class="proof-link">read the full example →</a>
     </div>
   </section>
 
@@ -163,6 +176,72 @@ import Base from '../layouts/Base.astro'
     transform: translateY(0);
   }
 
+  /* proof section */
+  .proof {
+    padding: 5rem 2rem 6rem;
+    background: rgba(42, 37, 32, 0.03);
+    border-top: 1px solid rgba(42, 37, 32, 0.08);
+  }
+
+  .proof-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .proof-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(42, 37, 32, 0.4);
+    margin-bottom: 1.5rem;
+  }
+
+  .proof-brief {
+    font-size: 0.9375rem;
+    color: rgba(42, 37, 32, 0.6);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .proof-excerpt {
+    border-left: 2px solid rgba(42, 37, 32, 0.15);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .proof-section-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(42, 37, 32, 0.45);
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .proof-section-title:first-child {
+    margin-top: 0;
+  }
+
+  .proof-excerpt p:not(.proof-section-title) {
+    font-size: 0.9375rem;
+    color: rgba(42, 37, 32, 0.7);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+
+  .proof-link {
+    font-size: 0.875rem;
+    color: rgba(42, 37, 32, 0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .proof-link:hover {
+    color: rgba(42, 37, 32, 0.85);
+  }
+
   @media (max-width: 768px) {
     .critique {
       align-items: flex-start;
@@ -171,6 +250,10 @@ import Base from '../layouts/Base.astro'
 
     h1 {
       font-size: 2.5rem;
+    }
+
+    .proof {
+      padding: 4rem 1.5rem 5rem;
     }
   }
 </style>
