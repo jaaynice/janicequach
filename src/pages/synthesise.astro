@@ -25,8 +25,21 @@ import Base from '../layouts/Base.astro'
 
       <div class="cta-row">
         <a href="https://synthesis.janicequach.workers.dev" class="cta">submit your research →</a>
-        <a href="/synthesise-example" class="example-link">see example output →</a>
       </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="proof-inner">
+      <p class="proof-label">example output</p>
+      <p class="proof-brief"><strong>Brief:</strong> Usability research on a B2B onboarding flow. 6 participants — mid-level product managers. Research: interview transcripts covering first-run experience, week-one usage, and unmet expectations.</p>
+      <div class="proof-excerpt">
+        <p class="proof-section-title">Executive summary</p>
+        <p>Onboarding fails not at the technical level but at the expectation level. Participants arrived expecting to configure a tool; the product expected them to explore one. Six of six participants described some version of "I didn't know what I was supposed to do first." The product doesn't give them a prescribed path.</p>
+        <p class="proof-section-title">Theme #1 — the empty state is the crisis point</p>
+        <p>Every participant encountered an empty dashboard after setup. None found it inviting. Five described it as either "blank" or "intimidating." One: <em>"I set it up and then stared at it. It didn't tell me what to do next."</em></p>
+      </div>
+      <a href="/synthesise-example" class="proof-link">read the full example →</a>
     </div>
   </section>
 
@@ -163,6 +176,72 @@ import Base from '../layouts/Base.astro'
     transform: translateY(0);
   }
 
+  /* proof section */
+  .proof {
+    padding: 5rem 2rem 6rem;
+    background: rgba(42, 37, 32, 0.03);
+    border-top: 1px solid rgba(42, 37, 32, 0.08);
+  }
+
+  .proof-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .proof-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(42, 37, 32, 0.4);
+    margin-bottom: 1.5rem;
+  }
+
+  .proof-brief {
+    font-size: 0.9375rem;
+    color: rgba(42, 37, 32, 0.6);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .proof-excerpt {
+    border-left: 2px solid rgba(42, 37, 32, 0.15);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .proof-section-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(42, 37, 32, 0.45);
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .proof-section-title:first-child {
+    margin-top: 0;
+  }
+
+  .proof-excerpt p:not(.proof-section-title) {
+    font-size: 0.9375rem;
+    color: rgba(42, 37, 32, 0.7);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+
+  .proof-link {
+    font-size: 0.875rem;
+    color: rgba(42, 37, 32, 0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .proof-link:hover {
+    color: rgba(42, 37, 32, 0.85);
+  }
+
   @media (max-width: 768px) {
     .synthesis {
       align-items: flex-start;
@@ -171,6 +250,10 @@ import Base from '../layouts/Base.astro'
 
     h1 {
       font-size: 2.5rem;
+    }
+
+    .proof {
+      padding: 4rem 1.5rem 5rem;
     }
   }
 </style>
