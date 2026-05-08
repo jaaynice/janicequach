@@ -22,58 +22,70 @@ import Base from '../layouts/Base.astro'
 
         <div class="section">
           <h2>first impression</h2>
-          <p>the eye lands on the headline immediately — the size and weight do their job — but the hero image pulls attention right while the copy pulls left, and the visual tension reads as unresolved rather than dynamic. the overall feeling is "polished template" more than "calm, focused tool," which works against the brand promise.</p>
+          <p>the eye lands immediately on the headline — which is doing its job — but the transition to the feature grid below it is abrupt enough to feel like a hard cut rather than a conversation. the page reads competent, not confident.</p>
+        </div>
+
+        <div class="section">
+          <h2>understanding of the problem</h2>
+          <p>the stated problem is clear: help small product teams coordinate without heavyweight tooling. but the page doesn't commit to this audience. the feature grid covers "enterprise-grade permissions," "advanced reporting," and "custom workflows" — these are mid-market concerns, not small-team concerns. a 5-person team doesn't need permissions. they need to stop losing decisions in Slack threads.</p>
+          <p>the designer's concern about the hero feeling disconnected is a symptom: the hero promises simplicity, but the features below it promise power. these are different value propositions for different buyers. the page needs to pick one.</p>
         </div>
 
         <div class="section">
           <h2>what's working</h2>
-          <p><strong>the headline copy is strong.</strong> "finally, a project tool your team will actually use" is specific, emotionally resonant, and speaks directly to the buyer's frustration. it earns its 56px treatment.</p>
-          <p><strong>the alternating layout in the feature section creates rhythm.</strong> left-right-left-right breaks the monotony of vertical scroll without requiring the user to work to understand it. the 28px/16px type pairing in this section is the most readable on the page.</p>
-          <p><strong>the pro card differentiation in pricing is correct.</strong> navy border plus a "most popular" badge is a well-established pattern that reduces cognitive load at the decision point. the visual anchor is doing real conversion work.</p>
+          <p><strong>the headline typography.</strong> the weight contrast between the bold primary statement and the lighter supporting copy underneath is well-judged. it creates genuine hierarchy without needing size alone to do the work — most landing pages lean too hard on scale.</p>
+          <p><strong>the social proof placement.</strong> logo strip immediately below the CTA is correct. it's not buried, it's not screaming. it's exactly where trust signals belong.</p>
+          <p><strong>the feature copy.</strong> short, declarative, benefit-first. "stop herding updates" is better than 90% of B2B feature copy. the instinct to lead with the problem is right.</p>
+        </div>
+
+        <div class="section">
+          <h2>decision quality</h2>
+          <p>the strongest decision on this page is the restraint in the hero — one headline, one supporting line, one CTA. that's deliberate and it works.</p>
+          <p>the weakest decision is the feature grid structure. three equal-weight columns imply three equally important capabilities. but for a small team, "visibility" is the whole pitch — "coordination" and "speed" are supporting evidence, not peers. the layout is treating a hierarchy as a list. a stacked layout with visibility as a hero-weight section and the others as supporting would better match how this audience evaluates tools.</p>
+          <p>the testimonial placement (below features, above FAQ) feels default rather than deliberate. testimonials from small-team leads placed <em>between</em> the hero and features would bridge the disconnect the designer feels.</p>
         </div>
 
         <div class="section">
           <h2>hierarchy &amp; layout</h2>
-          <p>the split hero (copy left, image right) is a sound structure, but the execution undermines it. the headline is left-aligned at 56px, which creates strong leftward pull — the eye reads the headline, drops to the subheadline, reaches the CTAs, and then has to travel all the way right to reach the image. by the time a user gets there, they've already mentally moved on. consider centering the hero or reducing the image to a supporting role (smaller, partially cropped) so the eye doesn't have to make that journey.</p>
-          <p>the feature section three-column grid has no hierarchy between columns. if "tasks" is the primary value driver, it needs to signal that — either through a larger icon, a bolder heading treatment, or a subtle background differentiation on that card. right now all three columns demand equal attention, which means none of them get it.</p>
-          <p>the social proof bar is placed correctly (below the fold break, before feature depth), but the logo height inconsistency actively damages trust. misaligned logos look like a rush job, which is the opposite of what social proof is supposed to do.</p>
+          <p>the disconnect the designer spotted is real, and the cause is structural: the hero section and feature grid have different implied grid widths. the hero content sits in roughly 720px; the feature grid snaps to full bleed with 32px gutters. the eye reads them as belonging to different containers — because they do.</p>
+          <p>fix: constrain the feature grid's max-width to match the hero content column. the breathing room at the edges signals coherence, not emptiness.</p>
+          <p>secondary issue: the CTA button in the hero is left-aligned with the headline, but the feature grid CTAs are centred. pick one and hold it. left-aligned reads more intentional on a content-heavy B2B page — it implies "we're here to inform, not to sell you."</p>
         </div>
 
         <div class="section">
-          <h2>typography &amp; spacing</h2>
-          <p>the 14px nav links at #6b7280 are too light for their role. navigation is wayfinding infrastructure — dropping it to gray-500 at that size makes it feel de-prioritized to the point of invisibility, especially on lower-contrast displays.</p>
-          <p>the "start free" button padding (8px top/bottom, 14px left/right) is tight enough to feel like an afterthought. primary CTAs need breathing room — 12–14px vertical padding is the baseline for a button that reads as confident.</p>
-          <p>the pricing feature lists at 13px are the most fatiguing read on the page. sixteen items at 13px inside a card creates a wall of text. this isn't a spacing fix — it's a content problem — but typographically, even bumping to 14px with 1.6 line height would help.</p>
+          <h2>typography, spacing &amp; craft</h2>
+          <p>the body copy in the feature cards is 15px at 1.5 line height. at 280px card width, that's too tight — lines are running long relative to height. either bump to 1.65 or narrow the cards to ~240px and let three columns breathe.</p>
+          <p>the section headers above each feature cluster ("visibility", "coordination", "speed") are sitting at the same visual weight as the feature card headlines. they should be clearly subordinate or clearly superior — right now they're in an uncomfortable middle ground that makes the hierarchy fuzzy when scanning.</p>
+          <p>one callout: the spacing between the hero CTA and the logo strip is 48px, but every other major section gap on the page is 80px. the inconsistency reads as an accident, not a decision.</p>
         </div>
 
         <div class="section">
           <h2>color &amp; contrast</h2>
-          <p>the navy / white / gray-500 palette is clean and appropriate for B2B — it signals reliability without being boring. no major accessibility flags at the primary text levels, though the #6b7280 body copy in the feature cards warrants a contrast check against white backgrounds (it sits close to the 4.5:1 WCAG AA threshold for 14px text).</p>
-          <p>the pricing section's navy border on the pro card is the only moment of color accent on the page, which gives it appropriate weight. the "most popular" badge should use a warmer accent (amber, or a lighter tint) to create contrast against the card treatment — if it's also navy, it blends.</p>
-          <p>the emotional tone skews cool and corporate. for a tool promising "calm workspace" for small teams, there's no warmth anywhere. one or two sections with a warm gray-50 or cream background would reinforce the brand message without breaking the palette.</p>
+          <p>the primary blue (#1F5CE6) is strong — confident and accessible. but it's being diluted by overuse. it's on the primary CTA, the feature icons, the active nav state, and the testimonial highlight colour. when everything is blue, nothing is.</p>
+          <p>reserve the blue for one thing: the primary action. let the feature icons go neutral (dark warm grey, same family as the body text). the page will feel more sophisticated immediately.</p>
+          <p>the light grey surface on the feature cards (#F5F7FA) is barely distinguishable from the page background (#FAFBFC). this is a 4% lightness difference — it won't survive dark mode or low-quality monitors. go to #ECEEF2 or drop the surface treatment entirely and use border + shadow instead.</p>
         </div>
 
         <div class="section">
           <h2>copy &amp; content</h2>
-          <p>the hero and feature copy are consistently good — specific, jargon-free, and benefit-led. "updates without the meetings" is the strongest feature heading on the page.</p>
-          <p>the pricing feature lists are the biggest copy problem. free: 8 items. pro: 12. team: 16. this is a feature inventory, not a decision framework. users scanning pricing aren't asking "what features exist" — they're asking "what do I lose if I don't upgrade." reframe each tier around 3–4 outcome-oriented differentiators and cut the rest.</p>
-          <p>the github social icon in the footer is a misalignment — this isn't a developer tool. github signals "open source" or "technical" to most users, muddying the positioning. remove it.</p>
+          <p>the hero headline is "finally, project management your team will actually use." this is safe. it positions against the category (project management), not the alternative (the status quo — spreadsheets and Slack). the sharper version is "your team already knows how to use Slack — we built for that." it names the actual competition and makes the positioning concrete.</p>
+          <p>the FAQ section at the bottom reads like legal copy written by the product team, not a conversation written for a buyer. "what integrations does [product] support?" is an SEO-optimised question, not a real objection. the real objection is "my team won't adopt another tool." answer that one.</p>
         </div>
 
         <div class="section priority">
           <h2>priority fixes</h2>
           <ol>
             <li>
-              <strong>fix the hero image quality and density.</strong>
-              re-export the dashboard screenshot at 2x resolution and simplify the visible interface to 3–5 items maximum — the "calm workspace" promise lives or dies on what the product looks like at first glance. highest-impact single fix on the page.
+              <strong>pick one audience and commit.</strong>
+              the hero speaks to small teams; the features speak to mid-market. strip "enterprise-grade permissions" and "advanced reporting" — replace with small-team language ("see who's doing what without asking," "decisions that don't get lost"). this solves the "two sites" feeling at the content level.
             </li>
             <li>
-              <strong>normalize the social proof logo heights.</strong>
-              set a fixed optical height of 24–28px for all logos using <code>max-height</code> with optical adjustment per logo — this takes 20 minutes and converts what reads as careless into a credibility signal.
+              <strong>align grid widths between hero and features.</strong>
+              match the content max-width (720px or whatever the hero uses) across every section. this solves the "two sites" feeling at the structural level.
             </li>
             <li>
-              <strong>reduce pricing feature lists to 4 items per tier, outcome-focused.</strong>
-              rewrite each as a clear differentiator (what you gain at each step up), remove the feature dump, and the pricing section becomes a decision aid rather than a comparison table users abandon.
+              <strong>reduce blue to one job.</strong>
+              strip it from icons and testimonials. keep it on the primary CTA only. the brand reads more confident when it's selective.
             </li>
           </ol>
         </div>
