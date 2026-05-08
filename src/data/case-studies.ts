@@ -57,4 +57,3 @@ export const caseStudies: CaseStudy[] = [
     heroImage: '/work/visual.svg',
   },
 ]
-
