@@ -1,7 +1,7 @@
 ---
 title: why most design feedback doesn't help
 date: 2026-05-08
-description: '"I''d try it in blue" is not feedback. here''s what is.'
+description: "\"I'd try it in blue\" is not feedback. here's what is."
 ---
 
 # why most design feedback doesn't help
