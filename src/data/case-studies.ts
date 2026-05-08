@@ -58,6 +58,3 @@ export const caseStudies: CaseStudy[] = [
   },
 ]
 
-export function getCaseStudy(slug: string): CaseStudy | undefined {
-  return caseStudies.find((cs) => cs.slug === slug)
-}
