@@ -2,11 +2,13 @@
 interface Props {
   title: string
   description?: string
+  ogImage?: string
 }
 
 const {
   title,
   description = 'head of design & research, embedded in product. clarity, honest trade-offs, and teams that think for themselves.',
+  ogImage = 'https://janicequach.com/og.jpg',
 } = Astro.props
 ---
 <!DOCTYPE html>
@@ -22,11 +24,11 @@ const {
     <meta property="og:description" content={description}>
     <meta property="og:type" content="website">
     <meta property="og:url" content={Astro.url}>
-    <meta property="og:image" content="https://janicequach.com/og.jpg">
+    <meta property="og:image" content={ogImage}>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
-    <meta name="twitter:image" content="https://janicequach.com/og.jpg">
+    <meta name="twitter:image" content={ogImage}>
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="canonical" href={Astro.url}>
